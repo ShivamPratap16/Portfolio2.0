@@ -9,6 +9,9 @@
   --color-ash: #525252;
   --color-hairline: #262626;
   --color-surface-soft: #0a0a0a;
+  
+  /* Dynamic Accent */
+  --color-accent: var(--theme-accent, #4ade80);
 
   /* ─── Fonts ────────────────────────────────────────────────────────── */
   --font-sans: var(--font-geist-sans);
@@ -16,12 +19,42 @@
 
   /* ─── Animations ───────────────────────────────────────────────────── */
   --animate-blink: blink 1s step-end infinite;
+  --animate-glitch: glitch 2s linear infinite;
 }
 
 body {
   background: var(--color-canvas);
   color: var(--color-ink);
   font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+@keyframes glitch {
+  2%, 64% { transform: translate(2px, 0) skew(0deg); }
+  4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+  62% { transform: translate(0, 0) skew(5deg); }
+}
+
+.crt-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  opacity: 0.15;
+}
+
+.api-json {
+  color: var(--color-ink);
+}
+.api-string {
+  color: var(--color-accent);
+}
+.api-key {
+  color: #fbbf24;
+}
+.api-number {
+  color: #e879f9;
 }
 
 @keyframes blink {

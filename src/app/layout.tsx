@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import FloatingNav from "@/components/nav/FloatingNav";
 import MobileNav from "@/components/nav/MobileNav";
+import { AppProvider } from "@/context/AppProvider";
+import CommandPalette from "@/components/ui/CommandPalette";
+import InteractiveTerminal from "@/components/ui/InteractiveTerminal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -98,11 +101,20 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-canvas text-ink font-mono min-h-screen antialiased`}
       >
-        <FloatingNav />
-        <MobileNav />
-        <div className="mx-auto w-full max-w-5xl flex-1 min-h-screen flex flex-col border-x border-hairline">
-          <main className="flex-1">{children}</main>
-        </div>
+        <AppProvider>
+          {/* Subtle CRT scanline overlay */}
+          <div className="crt-overlay" />
+          
+          <CommandPalette />
+          <InteractiveTerminal />
+          
+          <FloatingNav />
+          <MobileNav />
+          
+          <div className="mx-auto w-full max-w-5xl flex-1 min-h-screen flex flex-col border-x border-hairline relative z-10">
+            <main className="flex-1">{children}</main>
+          </div>
+        </AppProvider>
       </body>
     </html>
   );

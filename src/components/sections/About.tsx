@@ -1,20 +1,24 @@
-import BlurFadeIn from '@/components/ui/BlurFadeIn';
-import SectionHeading from '@/components/ui/SectionHeading';
+import BlurFadeIn from '../ui/BlurFadeIn';
+import SectionHeading from '../ui/SectionHeading';
+import LiveStats from './LiveStats';
+import { PERSONAL } from '@/lib/data';
 
 export default function About() {
   return (
-    <section id="about">
+    <div className="w-full">
       <SectionHeading title="About" />
-
       <BlurFadeIn delay={0.1}>
-        <p className="text-sm sm:text-base leading-relaxed text-body max-w-2xl">
-          Backend engineer who ships production APIs in Kotlin and Spring Boot.
-          I&apos;ve cut API response times by 95%, tamed N+1 queries across
-          million-row datasets, and built systems that handle real traffic.
-          Currently at LEAP Finance, previously Olcademy. I think in schemas,
-          indexes, and failure modes.
+        <p className="text-sm sm:text-base text-body leading-relaxed max-w-3xl">
+          I am a backend-focused Software Engineer with a passion for designing scalable systems, 
+          optimizing performance bottlenecks, and writing clean, reliable APIs. 
+          Currently based in {PERSONAL.location}, I specialize in building robust enterprise 
+          solutions using Kotlin, Spring Boot, and PostgreSQL. When I am not optimizing 
+          SQL queries, I enjoy organizing tech events and participating in hackathons.
         </p>
       </BlurFadeIn>
-    </section>
+      <BlurFadeIn delay={0.2}>
+        <LiveStats />
+      </BlurFadeIn>
+    </div>
   );
 }

@@ -142,6 +142,20 @@ export default function FloatingNav() {
         {/* Divider */}
         <span className="w-px h-4 bg-hairline" />
 
+        {/* Command Palette Trigger */}
+        <div className="relative flex items-center">
+          <button
+            onClick={() => document.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', ctrlKey: true }))}
+            className="flex items-center justify-center text-mute hover:text-[var(--color-accent)] transition-colors duration-200"
+            aria-label="Open command palette"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.3-4.3" />
+            </svg>
+          </button>
+        </div>
+
         {/* Resume download button */}
         <div className="relative flex items-center">
           <NavTooltip label="Resume" visible={resumeHover} />

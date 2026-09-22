@@ -251,14 +251,20 @@ export default function ServerCluster() {
         // Draw glowing packet
         ctx.beginPath();
         ctx.arc(proj.x, proj.y, 2.5 * proj.scale, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(74, 222, 128, ${alpha})`; // terminal green #4ade80
+        
+        // We fetch the accent color dynamically from the DOM to support theming on canvas
+        const accent = getComputedStyle(document.documentElement).getPropertyValue('--theme-accent').trim() || '#4ade80';
+        
+        ctx.fillStyle = accent;
+        ctx.globalAlpha = alpha;
         ctx.fill();
         
         // Add a subtle glow
         ctx.shadowBlur = 10;
-        ctx.shadowColor = '#4ade80';
+        ctx.shadowColor = accent;
         ctx.fill();
         ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1;
       }
 
       // Draw Nodes

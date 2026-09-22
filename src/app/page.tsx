@@ -1,3 +1,5 @@
+'use client';
+
 import TerminalHero from "@/components/hero/TerminalHero";
 import MetricsStrip from "@/components/ui/MetricsStrip";
 import About from "@/components/sections/About";
@@ -6,8 +8,16 @@ import Projects from "@/components/sections/Projects";
 import Skills from "@/components/sections/Skills";
 import Education from "@/components/sections/Education";
 import Contact from "@/components/sections/Contact";
+import ApiView from "@/components/views/ApiView";
+import { useApp } from "@/context/AppProvider";
 
 export default function Home() {
+  const { viewMode } = useApp();
+
+  if (viewMode === 'api') {
+    return <ApiView />;
+  }
+
   return (
     <>
       {/* Hero */}

@@ -160,7 +160,7 @@ export default function TerminalHero() {
             <div key={i} className="whitespace-pre-wrap">
               {line.type === 'command' ? (
                 <span>
-                  <span className="text-[#4ade80]">$ </span>
+                  <span className="text-[var(--color-accent)]">$ </span>
                   <span className="text-ink">{line.text}</span>
                 </span>
               ) : (
@@ -172,7 +172,7 @@ export default function TerminalHero() {
           {/* Currently typing line */}
           {isTyping && (
             <div className="whitespace-pre-wrap">
-              <span className="text-[#4ade80]">$ </span>
+              <span className="text-[var(--color-accent)]">$ </span>
               <span className="text-ink">{currentTyping}</span>
               <Cursor />
             </div>
@@ -181,7 +181,7 @@ export default function TerminalHero() {
           {/* Final idle prompt */}
           {!isTyping && (
             <div className="whitespace-pre-wrap">
-              <span className="text-[#4ade80]">$ </span>
+              <span className="text-[var(--color-accent)]">$ </span>
               <Cursor />
             </div>
           )}
