@@ -1,72 +1,64 @@
 import BlurFadeIn from '@/components/ui/BlurFadeIn';
 import SectionHeading from '@/components/ui/SectionHeading';
+import SpotlightCard from '@/components/ui/SpotlightCard';
 import { PROJECTS } from '@/lib/data';
 
 export default function Projects() {
   return (
-    <section id="projects">
+    <section id="projects" className="w-full">
       <SectionHeading title="Projects" />
-
-      <div>
-        {PROJECTS.map((project, i) => (
-          <BlurFadeIn key={project.title} delay={0.1 * i}>
-            <div className="py-6 sm:py-7 border-b border-hairline px-2 -mx-2 rounded-sm hover:bg-surface-soft/30 transition-colors">
-              {/* Title row */}
-              <div className="flex items-baseline gap-3">
-                <span className="text-[11px] font-mono text-ash tabular-nums">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 className="text-[15px] font-medium text-ink">
-                  {project.title}
-                </h3>
-                <span className="text-[10px] text-ash">{project.year}</span>
+      <div className="flex flex-col gap-6">
+        {PROJECTS.map((project, index) => (
+          <BlurFadeIn key={project.title} delay={0.1 * index}>
+            <SpotlightCard className="group">
+              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between mb-4 gap-2">
+                <div className="flex items-center gap-4">
+                  <span className="text-[10px] text-[var(--color-accent)] font-mono tracking-wider opacity-60 group-hover:opacity-100 transition-opacity">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="text-lg font-bold text-ink">{project.title}</h3>
+                </div>
+                <span className="text-xs text-mute font-mono">{project.year}</span>
               </div>
 
-              {/* Description */}
-              <p className="mt-2 text-[13px] sm:text-[14px] leading-[1.6] text-body max-w-2xl ml-[calc(11px+0.75rem)]">
-                {project.description}
-              </p>
-
-              {/* Tech stack pills */}
-              <div className="mt-3 flex flex-wrap gap-1.5 ml-[calc(11px+0.75rem)]">
+              <div className="flex flex-wrap gap-2 mb-4">
                 {project.stack.map((tech) => (
                   <span
                     key={tech}
-                    className="text-[10px] tracking-[0.04em] text-mute border border-hairline rounded-full px-2 py-0.5 bg-canvas"
+                    className="px-2.5 py-1 text-[10px] tracking-wide text-ink font-mono bg-canvas border border-hairline rounded-full"
                   >
                     {tech}
                   </span>
                 ))}
               </div>
 
-              {/* Links */}
-              {(project.liveUrl || project.githubUrl) && (
-                <div className="mt-3 flex gap-4 ml-[calc(11px+0.75rem)]">
-                  {project.liveUrl && (
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-mute underline underline-offset-2 hover:text-ink transition-colors inline-flex items-center gap-1"
-                    >
-                      Live
-                      <span className="text-[10px]">↗</span>
-                    </a>
-                  )}
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs text-mute underline underline-offset-2 hover:text-ink transition-colors inline-flex items-center gap-1"
-                    >
-                      GitHub
-                      <span className="text-[10px]">↗</span>
-                    </a>
-                  )}
-                </div>
-              )}
-            </div>
+              <p className="text-sm text-body leading-relaxed mb-6 font-sans">
+                {project.description}
+              </p>
+
+              <div className="flex items-center gap-4 text-xs font-mono">
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-mute hover:text-ink transition-colors"
+                  >
+                    GitHub ↗
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 text-mute hover:text-ink transition-colors"
+                  >
+                    Live Demo ↗
+                  </a>
+                )}
+              </div>
+            </SpotlightCard>
           </BlurFadeIn>
         ))}
       </div>

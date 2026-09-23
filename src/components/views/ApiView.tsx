@@ -26,19 +26,18 @@ export default function ApiView() {
     });
   };
 
-  const payload = {
-    status: 200,
-    timestamp: new Date().toISOString(),
-    developer: "Shivam Pratap Raj",
-    endpoints: {
-      personal: DATA.PERSONAL,
-      experience: DATA.EXPERIENCES,
-      projects: DATA.PROJECTS,
-      skills: DATA.SKILLS,
-      education: DATA.EDUCATION,
-      achievements: DATA.ACHIEVEMENTS
-    }
-  };
+    const payload = {
+      status: 200,
+      timestamp: new Date().toISOString(),
+      developer: "Shivam Pratap Raj",
+      endpoints: {
+        personal: DATA.PERSONAL,
+        experience: DATA.EXPERIENCES,
+        projects: DATA.PROJECTS,
+        skills: DATA.SKILLS,
+        education: DATA.EDUCATION,
+      }
+    };
 
   return (
     <div className="w-full min-h-screen bg-canvas font-mono text-xs sm:text-sm p-4 sm:p-8 pt-24 pb-32">

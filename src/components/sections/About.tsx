@@ -1,6 +1,5 @@
 import BlurFadeIn from '../ui/BlurFadeIn';
 import SectionHeading from '../ui/SectionHeading';
-import LiveStats from './LiveStats';
 import { PERSONAL } from '@/lib/data';
 
 export default function About() {
@@ -15,9 +14,6 @@ export default function About() {
           solutions using Kotlin, Spring Boot, and PostgreSQL. When I am not optimizing 
           SQL queries, I enjoy organizing tech events and participating in hackathons.
         </p>
-      </BlurFadeIn>
-      <BlurFadeIn delay={0.2}>
-        <LiveStats />
       </BlurFadeIn>
     </div>
   );

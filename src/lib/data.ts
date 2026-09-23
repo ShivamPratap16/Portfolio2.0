@@ -66,7 +66,7 @@ export const PERSONAL: Personal = {
   name: 'Shivam Pratap Raj',
   email: 'shivampratap54451@gmail.com',
   phone: '+91-8815946396',
-  github: 'https://github.com/shivampratap',
+  github: 'https://github.com/ShivamPratap16',
   linkedin: 'https://linkedin.com/in/shivampratapraj',
   location: 'NIT Kurukshetra · Bengaluru',
   title: 'Software Engineer',
@@ -120,12 +120,12 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-export const SKILLS: Skills = {
-  languages: ['Kotlin', 'Java', 'SQL', 'Python', 'JavaScript', 'C++'],
-  frameworks: ['Spring Boot', 'Express.js', 'React.js', 'Flask'],
-  databases: ['PostgreSQL', 'Elasticsearch', 'MongoDB', 'Firebase', 'AWS'],
-  tools: ['Git', 'Docker', 'Postman', 'Liquibase', 'VS Code', 'Jupyter', 'Vercel'],
-  core: ['REST API Development', 'System Design', 'Database Design', 'Performance Optimization'],
+export const SKILLS = {
+  LANGUAGES: ['Kotlin', 'Java', 'Python', 'JavaScript', 'SQL', 'C++'],
+  BACKEND: ['Spring Boot', 'Express', 'Flask', 'REST APIs'],
+  DATA: ['PostgreSQL', 'Elasticsearch', 'MongoDB'],
+  INFRA: ['Docker', 'AWS', 'Liquibase'],
+  ENGINEERING: ['System Design', 'Database Design', 'Performance Optimization'],
 };
 
 export const EDUCATION: Education[] = [
@@ -135,22 +135,6 @@ export const EDUCATION: Education[] = [
     period: '2022 – 2026',
     score: 'CGPA: 7.80',
   },
-  {
-    institution: 'Sri Krishna Public High Secondary School',
-    degree: 'MP Board (Class XII)',
-    period: '2020 – 2021',
-    score: 'Aggregate: 90%',
-  },
-];
-
-export const ACHIEVEMENTS: string[] = [
-  'Smart India Hackathon — cleared internal round, top 10 of 200 teams at NIT Kurukshetra (2024)',
-  'Workshop Organizer — conducted a data analytics workshop attended by 500+ students (2023)',
-];
-
-export const POSITIONS: Position[] = [
-  { title: 'Tech Head', org: 'Antariksh — Astronomy Club, NIT Kurukshetra', period: '2023–2024' },
-  { title: 'Event Organizer', org: 'Innovation Cell, NIT Kurukshetra — BidBizz (Finance Event)', period: '2023' },
 ];
 
 export const METRICS: Metric[] = [
@@ -164,16 +148,14 @@ export const TERMINAL_COMMANDS: TerminalCommand[] = [
   { cmd: 'whoami', response: 'shivam_pratap_raj' },
   { cmd: 'cat role.txt', response: 'Software Engineer @ LEAP Finance\nBackend · APIs · Performance · Systems' },
   { cmd: 'ls skills/', response: 'kotlin  java  spring-boot  postgresql  elasticsearch  docker' },
-  { cmd: 'echo $LOCATION', response: 'NIT Kurukshetra · Bengaluru' },
+  { cmd: 'cat hints.txt', response: '💡 PRO TIP: Press [Ctrl + K] to open the Command Palette, or [Ctrl + `] for the interactive terminal.' },
 ];
 
 export const NAV_SECTIONS = [
-  { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
-  { id: 'contact', label: 'Contact' },
 ] as const;
 
 export interface SocialLink {
@@ -185,5 +167,6 @@ export interface SocialLink {
 export const SOCIAL_LINKS: SocialLink[] = [
   { label: 'GitHub', href: PERSONAL.github, icon: 'github' },
   { label: 'LinkedIn', href: PERSONAL.linkedin, icon: 'linkedin' },
+  { label: 'X', href: 'https://x.com/p0XShivam', icon: 'x' },
   { label: 'Email', href: `mailto:${PERSONAL.email}`, icon: 'email' },
 ];

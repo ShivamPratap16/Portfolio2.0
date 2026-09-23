@@ -7,7 +7,8 @@ export default function GlitchText({ text, className = '' }: { text: string; cla
     <div className={`relative inline-block ${className}`}>
       <span className="relative z-10">{text}</span>
       <motion.span
-        className="absolute top-0 left-[2px] -z-10 text-[var(--color-accent)] opacity-70"
+        aria-hidden="true"
+        className="absolute top-0 left-[2px] -z-10 text-[var(--color-accent)] opacity-70 select-none pointer-events-none"
         animate={{
           x: [-2, 2, -1, 0],
           y: [1, -1, 0, 0],
@@ -23,7 +24,8 @@ export default function GlitchText({ text, className = '' }: { text: string; cla
         {text}
       </motion.span>
       <motion.span
-        className="absolute top-0 -left-[2px] -z-10 text-[#e879f9] opacity-70"
+        aria-hidden="true"
+        className="absolute top-0 -left-[2px] -z-10 text-[#e879f9] opacity-70 select-none pointer-events-none"
         animate={{
           x: [2, -2, 1, 0],
           y: [-1, 1, 0, 0],

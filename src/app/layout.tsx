@@ -6,6 +6,7 @@ import MobileNav from "@/components/nav/MobileNav";
 import { AppProvider } from "@/context/AppProvider";
 import CommandPalette from "@/components/ui/CommandPalette";
 import InteractiveTerminal from "@/components/ui/InteractiveTerminal";
+import ShortcutHints from "@/components/ui/ShortcutHints";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +18,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// ... existing metadata ...
 export const metadata: Metadata = {
   title: "Shivam Pratap Raj — Software Engineer",
   description:
@@ -99,14 +101,16 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-canvas text-ink font-mono min-h-screen antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-canvas text-ink font-sans min-h-screen antialiased`}
       >
         <AppProvider>
-          {/* Subtle CRT scanline overlay */}
+          {/* Textures and Overlays */}
+          <div className="noise-overlay" />
           <div className="crt-overlay" />
           
           <CommandPalette />
           <InteractiveTerminal />
+          <ShortcutHints />
           
           <FloatingNav />
           <MobileNav />

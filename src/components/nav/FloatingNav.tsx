@@ -30,20 +30,20 @@ function DownloadIcon() {
 function ArrowAnnotation() {
   return (
     <svg
-      viewBox="0 0 60 40"
+      viewBox="0 0 24 36"
       fill="none"
-      className="w-12 h-8 text-mute"
+      className="w-6 h-8 text-mute/60"
       aria-hidden="true"
     >
       <path
-        d="M55 5C45 5 20 8 10 30"
+        d="M12 32 C 18 22, 18 14, 12 4"
         stroke="currentColor"
         strokeWidth="1.2"
         strokeLinecap="round"
         strokeDasharray="3 3"
       />
       <path
-        d="M14 25L10 32L5 26"
+        d="M7 9 L 12 4 L 17 9"
         stroke="currentColor"
         strokeWidth="1.2"
         strokeLinecap="round"
@@ -164,7 +164,7 @@ export default function FloatingNav() {
             download
             onMouseEnter={() => setResumeHover(true)}
             onMouseLeave={() => setResumeHover(false)}
-            className="flex items-center justify-center text-mute hover:text-ink transition-colors duration-200"
+            className="flex items-center justify-center w-8 h-8 rounded-full border border-hairline/80 text-mute hover:text-ink hover:border-mute transition-all duration-200"
             aria-label="Download resume"
           >
             <DownloadIcon />
@@ -173,9 +173,9 @@ export default function FloatingNav() {
       </div>
 
       {/* Hand-drawn annotation */}
-      <div className="mt-2 flex flex-col items-center pointer-events-none select-none">
+      <div className="mt-1 flex flex-col items-center pointer-events-none select-none opacity-80">
         <ArrowAnnotation />
-        <span className="text-[10px] italic text-mute font-mono -mt-1">
+        <span className="text-sm text-mute font-sans -mt-1 -mr-2 rotate-2">
           grab my cv
         </span>
       </div>

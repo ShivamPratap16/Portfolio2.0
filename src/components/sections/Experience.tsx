@@ -1,83 +1,79 @@
 'use client';
 
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import BlurFadeIn from '@/components/ui/BlurFadeIn';
-import SectionHeading from '@/components/ui/SectionHeading';
+import { motion, AnimatePresence } from 'framer-motion';
+import BlurFadeIn from '../ui/BlurFadeIn';
+import SectionHeading from '../ui/SectionHeading';
+import SpotlightCard from '../ui/SpotlightCard';
 import { EXPERIENCES } from '@/lib/data';
 
 export default function Experience() {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
-
-  const toggle = (i: number) =>
-    setExpandedIndex((prev) => (prev === i ? null : i));
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
   return (
-    <section id="experience">
+    <section id="experience" className="w-full">
       <SectionHeading title="Experience" />
-
-      <div>
-        {EXPERIENCES.map((exp, i) => (
-          <BlurFadeIn key={exp.company} delay={0.1 * i}>
-            <div
-              role="button"
-              tabIndex={0}
-              onClick={() => toggle(i)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  toggle(i);
-                }
-              }}
-              className="group cursor-pointer border-b border-hairline py-5 sm:py-6 px-2 -mx-2 rounded-sm hover:bg-surface-soft/30 transition-colors"
-            >
-              {/* Header row */}
-              <div className="flex items-start justify-between gap-4">
-                <div className="min-w-0">
-                  <div className="flex items-baseline gap-2 flex-wrap">
-                    <span className="text-ink font-medium text-sm sm:text-base">
-                      {exp.company}
-                    </span>
-                    <span className="text-ash text-xs">{exp.location}</span>
+      <div className="flex flex-col gap-4">
+        {EXPERIENCES.map((exp, index) => {
+          const isExpanded = expandedIndex === index;
+          return (
+            <BlurFadeIn key={`${exp.company}-${exp.role}`} delay={0.1 * index}>
+              <SpotlightCard 
+                onClick={() => setExpandedIndex(isExpanded ? null : index)}
+              >
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
+                  <div>
+                    <h3 className="text-base sm:text-lg font-bold text-ink">
+                      {exp.role}
+                    </h3>
+                    <div className="text-sm text-[var(--color-accent)] font-mono mt-1">
+                      {exp.company} <span className="text-mute px-1">·</span> {exp.location}
+                    </div>
                   </div>
-                  <p className="text-xs text-mute mt-0.5">{exp.role}</p>
+                  <div className="text-xs text-mute font-mono flex items-center gap-3">
+                    {exp.period}
+                    <motion.svg
+                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                      className="w-4 h-4"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </motion.svg>
+                  </div>
                 </div>
 
-                <span className="text-xs text-mute tabular-nums whitespace-nowrap shrink-0">
-                  {exp.period}
-                </span>
-              </div>
-
-              {/* Expandable bullets */}
-              <AnimatePresence initial={false}>
-                {expandedIndex === i && (
-                  <motion.div
-                    key="bullets"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: 'easeInOut' }}
-                    className="overflow-hidden"
-                  >
-                    <ul className="mt-4 space-y-2">
-                      {exp.bullets.map((bullet) => (
-                        <li
-                          key={bullet}
-                          className="flex gap-2 text-xs sm:text-sm text-body leading-relaxed"
-                        >
-                          <span className="text-ash select-none shrink-0">
-                            –
-                          </span>
-                          <span>{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </BlurFadeIn>
-        ))}
+                <AnimatePresence initial={false}>
+                  {isExpanded && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <ul className="mt-4 space-y-3 font-sans">
+                        {exp.bullets.map((bullet, i) => (
+                          <li
+                            key={i}
+                            className="text-sm text-body leading-relaxed flex items-start gap-3"
+                          >
+                            <span className="text-[var(--color-accent)] mt-1.5 text-[8px] opacity-60">
+                              ■
+                            </span>
+                            <span className="flex-1">{bullet}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </SpotlightCard>
+            </BlurFadeIn>
+          );
+        })}
       </div>
     </section>
   );
