@@ -106,7 +106,7 @@ export const PROJECTS: Project[] = [
     stack: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Vercel'],
     description:
       'Built a role-based placement portal serving 1000+ students, companies, admins, and coordinators, automating job postings, eligibility filtering, and live application tracking. Implemented automated eligibility checks against student academic data, eliminating manual shortlisting. Secured with JWT-based authentication, role-specific dashboards, and protected routes.',
-    liveUrl: '#',
+    liveUrl: 'https://tnp-nitkkr.vercel.app/',
     githubUrl: null,
   },
   {
@@ -116,7 +116,7 @@ export const PROJECTS: Project[] = [
     description:
       'Built an append-only double-entry ledger as the sole money-writing module, guaranteeing zero balance drift and no double-spends under concurrent transfers. Enforced correctness under concurrency via fixed-order pessimistic row locking, committing ledger entries and balance updates atomically. Implemented idempotency keys on all money-movement APIs, making retries safe by design.',
     liveUrl: null,
-    githubUrl: '#',
+    githubUrl: 'https://github.com/ShivamPratap16/Reckon',
   },
 ];
 
