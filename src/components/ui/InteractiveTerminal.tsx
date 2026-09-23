@@ -72,10 +72,10 @@ export default function InteractiveTerminal() {
       case 'download':
         if (args[1] === 'resume') {
           const a = document.createElement('a');
-          a.href = '/resume.pdf';
-          a.download = 'resume.pdf';
+          a.href = '/Shivam_resume.pdf';
+          a.download = 'Shivam_resume.pdf';
           a.click();
-          output = 'Downloading resume.pdf...';
+          output = 'Downloading Shivam_resume.pdf...';
         } else {
           output = 'File not found.';
         }

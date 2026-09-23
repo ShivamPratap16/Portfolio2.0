@@ -50,7 +50,7 @@ export default function MobileNav() {
 
       {/* Resume download button — inverted style */}
       <a
-        href="/resume.pdf"
+        href="/Shivam_resume.pdf"
         download
         className="flex items-center gap-1.5 ml-1 px-3 py-1.5 bg-ink text-canvas rounded-full text-[10px] sm:text-[11px] tracking-wide font-mono uppercase hover:bg-ink/90 transition-colors"
         aria-label="Download resume"

@@ -160,8 +160,8 @@ export default function FloatingNav() {
         <div className="relative flex items-center">
           <NavTooltip label="Resume" visible={resumeHover} />
           <a
-            href="/resume.pdf"
-            download="shivam_resume.pdf"
+            href="/Shivam_resume.pdf"
+            download="Shivam_resume.pdf"
             onMouseEnter={() => setResumeHover(true)}
             onMouseLeave={() => setResumeHover(false)}
             className="flex items-center justify-center w-8 h-8 rounded-full border border-hairline/80 text-mute hover:text-ink hover:border-mute transition-all duration-200"

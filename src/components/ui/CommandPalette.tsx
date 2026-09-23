@@ -98,8 +98,8 @@ export default function CommandPalette() {
                   <Command.Item 
                     onSelect={() => runCommand(() => {
                       const a = document.createElement('a');
-                      a.href = '/resume.pdf';
-                      a.download = 'resume.pdf';
+                      a.href = '/Shivam_resume.pdf';
+                      a.download = 'Shivam_resume.pdf';
                       a.click();
                     })}
                     className="flex items-center gap-2 px-2 py-2 rounded cursor-pointer aria-selected:bg-surface-soft aria-selected:text-[var(--color-accent)] text-body"
