@@ -67,7 +67,7 @@ export const PERSONAL: Personal = {
   email: 'shivampratap54451@gmail.com',
   phone: '+91-8815946396',
   github: 'https://github.com/ShivamPratap16',
-  linkedin: 'https://linkedin.com/in/shivampratapraj',
+  linkedin: 'https://www.linkedin.com/in/shivam-pratap-raj-99280826b/',
   location: 'NIT Kurukshetra · Bengaluru',
   title: 'Software Engineer',
   subtitle: 'Backend · APIs · Performance · Systems',
