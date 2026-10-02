@@ -1,84 +1,148 @@
-import BlurFadeIn from '@/components/ui/BlurFadeIn';
-import SectionHeading from '@/components/ui/SectionHeading';
-import { PERSONAL } from '@/lib/data';
+'use client';
+
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
+import { SplitReveal, Reveal } from '@/components/fx/Reveal';
+import Magnetic from '@/components/fx/Magnetic';
+import ScrambleText from '@/components/fx/ScrambleText';
+import RevealWordmark from '@/components/fx/RevealWordmark';
+import { PERSONAL, SOCIAL_LINKS } from '@/lib/data';
+import { scrollToId } from '@/lib/scroll';
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(PERSONAL.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      window.location.href = `mailto:${PERSONAL.email}`;
+    }
+  };
+
   return (
-    <section id="contact">
-      <SectionHeading title="Contact" />
+    <div className="relative">
+      <div className="mb-10 flex items-center gap-4 font-mono text-[11px] uppercase tracking-[0.2em] text-mute">
+        <span className="text-accent">(05)</span>
+        <span>Contact</span>
+        <span className="h-px flex-1 bg-hairline" />
+      </div>
 
-      <BlurFadeIn delay={0.1}>
-        {/* Terminal CTA block */}
-        <div className="border border-hairline bg-surface-soft rounded-lg p-6 font-mono text-sm">
-          <p className="text-mute">
-            <span className="text-ash">$</span> echo &quot;let&apos;s build
-            something&quot;
+      <h2 className="text-[clamp(3rem,11vw,10.5rem)] font-semibold leading-[0.88] tracking-[-0.055em] text-ink">
+        <SplitReveal text="Let's build" className="block" />
+        <span className="flex flex-wrap items-center gap-x-[0.25em]">
+          <SplitReveal text="something" className="font-serif font-normal italic text-accent" delay={0.15} />
+          <SplitReveal text="that scales." delay={0.25} />
+        </span>
+      </h2>
+
+      <div className="mt-16 grid items-center gap-12 md:grid-cols-[1fr_auto]">
+        <Reveal>
+          <p className="max-w-lg text-xl leading-snug text-body">
+            Open to backend &amp; platform engineering roles. If you have a hard problem involving APIs, data or
+            correctness under load — I&apos;d love to hear about it.
           </p>
+          <button
+            onClick={copy}
+            data-cursor={copied ? 'Copied' : 'Copy'}
+            className="group mt-8 flex items-center gap-3 border-b border-hairline pb-2 text-left text-2xl font-medium tracking-tight text-ink transition-colors hover:border-accent sm:text-3xl"
+          >
+            <span className="break-all">{PERSONAL.email}</span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={copied ? 'y' : 'n'}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                className="shrink-0 font-mono text-xs uppercase tracking-[0.15em] text-accent"
+              >
+                {copied ? 'copied ✓' : 'copy'}
+              </motion.span>
+            </AnimatePresence>
+          </button>
+        </Reveal>
 
-          <p className="mt-2">
-            <span className="text-ash mr-1">&gt;</span>
+        <Reveal delay={0.1} className="justify-self-start md:justify-self-end">
+          <Magnetic strength={0.45}>
             <a
               href={`mailto:${PERSONAL.email}`}
-              className="text-ink underline underline-offset-2 hover:text-mute transition-colors"
+              className="group relative flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-accent text-canvas sm:h-56 sm:w-56"
             >
-              {PERSONAL.email}
+              <span className="absolute inset-0 scale-0 rounded-full bg-ink transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-100" />
+              <span className="relative text-center font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-canvas">
+                Get in
+                <br />
+                <span className="font-serif text-4xl normal-case italic tracking-normal">touch</span>
+              </span>
             </a>
-          </p>
+          </Magnetic>
+        </Reveal>
+      </div>
 
-          <p className="mt-1">
-            <span className="text-ash mr-1">&gt;</span>
-            <a
-              href={`tel:${PERSONAL.phone.replace(/-/g, '')}`}
-              className="text-ink underline underline-offset-2 hover:text-mute transition-colors"
-            >
-              {PERSONAL.phone}
-            </a>
-          </p>
+      <div className="mt-24 grid gap-10 border-t border-hairline pt-10 md:grid-cols-3">
+        <div>
+          <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-mute">Socials</div>
+          <ul className="mt-4 space-y-2">
+            {SOCIAL_LINKS.map((l) => (
+              <li key={l.label}>
+                <a
+                  href={l.href}
+                  target={l.href.startsWith('mailto') ? undefined : '_blank'}
+                  rel="noreferrer"
+                  className="group inline-flex items-center gap-2 text-lg text-body transition-colors hover:text-accent"
+                >
+                  <ScrambleText text={l.label} onHover duration={450} />
+                  <ArrowUpRight
+                    size={18}
+                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
-      </BlurFadeIn>
-
-      {/* Social buttons */}
-      <BlurFadeIn delay={0.2}>
-        <div className="flex gap-3 mt-6">
+        <div>
+          <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-mute">Shortcuts</div>
+          <ul className="mt-4 space-y-2 text-body">
+            <li>
+              <kbd className="rounded border border-hairline px-1.5 py-0.5 font-mono text-xs text-ink">⌘ K</kbd>{' '}
+              command palette
+            </li>
+            <li>
+              <kbd className="rounded border border-hairline px-1.5 py-0.5 font-mono text-xs text-ink">⌘ `</kbd>{' '}
+              interactive terminal
+            </li>
+            <li className="text-mute">try `sudo hire shivam`</li>
+          </ul>
+        </div>
+        <div className="md:text-right">
+          <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-mute">Résumé</div>
           <a
-            href={PERSONAL.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-hairline rounded-full px-4 py-2 text-xs text-mute hover:text-ink hover:border-ink/30 transition-colors"
+            href="/Shivam_resume.pdf"
+            download="Shivam_resume.pdf"
+            className="mt-4 inline-block text-lg text-body transition-colors hover:text-accent"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
-            </svg>
-            GitHub
-          </a>
-
-          <a
-            href={PERSONAL.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-hairline rounded-full px-4 py-2 text-xs text-mute hover:text-ink hover:border-ink/30 transition-colors"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.123 2.062 2.062 0 0 1 0 4.123ZM6.906 20.452H3.691V9h3.215v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z" />
-            </svg>
-            LinkedIn
+            Download PDF ↓
           </a>
         </div>
-      </BlurFadeIn>
-    </section>
+      </div>
+
+      <footer className="mt-24">
+        <RevealWordmark
+          text="SHIVAM"
+          className="whitespace-nowrap text-center text-[min(24vw,21rem)] font-semibold leading-[0.8] tracking-[-0.07em]"
+        />
+        <div className="mt-8 flex flex-col gap-3 border-t border-hairline py-6 font-mono text-[11px] uppercase tracking-[0.15em] text-mute sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} {PERSONAL.name}</span>
+          <span>Designed &amp; engineered from scratch</span>
+          <button onClick={() => scrollToId('top')} className="text-left uppercase text-ink transition-colors hover:text-accent">
+            Back to top ↑
+          </button>
+        </div>
+      </footer>
+    </div>
   );
 }

@@ -1,12 +1,25 @@
 'use client';
 
-import TerminalHero from "@/components/hero/TerminalHero";
-import Experience from "@/components/sections/Experience";
-import Projects from "@/components/sections/Projects";
-import Skills from "@/components/sections/Skills";
-import Education from "@/components/sections/Education";
-import ApiView from "@/components/views/ApiView";
-import { useApp } from "@/context/AppProvider";
+import Hero from '@/components/hero/Hero';
+import About from '@/components/sections/About';
+import Experience from '@/components/sections/Experience';
+import Projects from '@/components/sections/Projects';
+import Skills from '@/components/sections/Skills';
+import Contact from '@/components/sections/Contact';
+import Marquee from '@/components/fx/Marquee';
+import ApiView from '@/components/views/ApiView';
+import { useApp } from '@/context/AppProvider';
+import { SKILLS } from '@/lib/data';
+
+const MARQUEE_WORDS = [...SKILLS.LANGUAGES.slice(0, 2), ...SKILLS.BACKEND.slice(0, 1), ...SKILLS.DATA, ...SKILLS.INFRA.slice(0, 2)];
+
+function Section({ id, children, className = '' }: { id: string; children: React.ReactNode; className?: string }) {
+  return (
+    <section id={id} className={`relative px-5 sm:px-8 ${className}`}>
+      <div className="mx-auto max-w-[1400px]">{children}</div>
+    </section>
+  );
+}
 
 export default function Home() {
   const { viewMode } = useApp();
@@ -17,68 +30,44 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero */}
-      <section id="hero" className="relative bg-transparent font-mono overflow-hidden">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-16 lg:px-24 pt-4 sm:pt-6 md:pt-10 pb-4 sm:pb-6 md:pb-8">
-          <TerminalHero />
-        </div>
-      </section>
+      <Hero />
 
-      {/* Metrics (Hidden for now) */}
-      {/* 
-      <section className="bg-transparent">
-        <div className="max-w-[960px] mx-auto px-5 sm:px-6 md:px-16 lg:px-24 py-8 md:py-12">
-          <MetricsStrip />
-        </div>
-      </section>
-      */}
+      <div className="border-y border-hairline py-6 md:py-8">
+        <Marquee baseVelocity={-2.5}>
+          {MARQUEE_WORDS.map((w, i) => (
+            <span key={w} className="flex items-center">
+              <span
+                className={`px-6 text-[clamp(2.5rem,7vw,6rem)] font-semibold leading-none tracking-[-0.04em] md:px-10 ${
+                  i % 2 ? 'text-outline' : 'text-ink'
+                }`}
+              >
+                {w}
+              </span>
+              <span className="text-[clamp(1.5rem,3vw,2.5rem)] text-accent">✦</span>
+            </span>
+          ))}
+        </Marquee>
+      </div>
 
-      {/* About (Hidden for now) */}
-      {/* 
-      <section id="about" className="bg-transparent">
-        <div className="max-w-[960px] mx-auto px-5 sm:px-6 md:px-16 lg:px-24 py-12 md:py-16">
-          <About />
-        </div>
-      </section>
-      */}
+      <Section id="about" className="py-28 md:py-40">
+        <About />
+      </Section>
 
-      {/* Experience */}
-      <section id="experience" className="bg-transparent">
-        <div className="max-w-[960px] mx-auto px-5 sm:px-6 md:px-16 lg:px-24 py-12 md:py-16">
-          <Experience />
-        </div>
-      </section>
+      <Section id="experience" className="py-20 md:py-32">
+        <Experience />
+      </Section>
 
-      {/* Projects */}
-      <section id="projects" className="bg-transparent">
-        <div className="max-w-[960px] mx-auto px-5 sm:px-6 md:px-16 lg:px-24 py-12 md:py-16">
-          <Projects />
-        </div>
-      </section>
+      <Section id="projects" className="py-20 md:py-32">
+        <Projects />
+      </Section>
 
-      {/* Skills */}
-      <section id="skills" className="bg-transparent">
-        <div className="max-w-[960px] mx-auto px-5 sm:px-6 md:px-16 lg:px-24 py-12 md:py-16">
-          <Skills />
-        </div>
-      </section>
+      <Section id="skills" className="py-20 md:py-32">
+        <Skills />
+      </Section>
 
-      {/* Education */}
-      <section id="education" className="bg-transparent">
-        <div className="max-w-[960px] mx-auto px-5 sm:px-6 md:px-16 lg:px-24 py-12 md:py-16">
-          <Education />
-        </div>
-      </section>
-
-      {/* Contact (Hidden for now) */}
-      {/* 
-      <section id="contact" className="bg-transparent">
-        <div className="max-w-[960px] mx-auto px-5 sm:px-6 md:px-16 lg:px-24 py-12 md:py-24">
-          <Contact />
-        </div>
-      </section>
-      */}
-
+      <Section id="contact" className="pt-28 md:pt-40">
+        <Contact />
+      </Section>
     </>
   );
 }

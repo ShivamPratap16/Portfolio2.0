@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '@/context/AppProvider';
 import * as DATA from '@/lib/data';
+import { ACCENT_MAP, type AccentColor } from '@/context/AppProvider';
 
 export default function InteractiveTerminal() {
   const { isTerminalOpen, setIsTerminalOpen, setAccentColor, setViewMode } = useApp();
@@ -38,7 +39,7 @@ export default function InteractiveTerminal() {
             <br />- <span className="text-[var(--color-accent)]">clear</span> : clear terminal history
             <br />- <span className="text-[var(--color-accent)]">whoami</span> : prints current user
             <br />- <span className="text-[var(--color-accent)]">cat [file]</span> : view file contents (try: cat projects.txt, cat skills.json)
-            <br />- <span className="text-[var(--color-accent)]">theme [color]</span> : change theme (green, cyan, amber, magenta)
+            <br />- <span className="text-[var(--color-accent)]">theme [color]</span> : change theme (lime, green, cyan, amber, magenta)
             <br />- <span className="text-[var(--color-accent)]">download resume</span> : trigger PDF download
             <br />- <span className="text-[var(--color-accent)]">sudo hire shivam</span> : highly recommended
             <br />- <span className="text-[var(--color-accent)]">api mode</span> : toggle raw API view
@@ -53,11 +54,11 @@ export default function InteractiveTerminal() {
         break;
       case 'theme':
         const color = args[1];
-        if (['green', 'cyan', 'amber', 'magenta'].includes(color)) {
-          setAccentColor(color as any);
+        if (color && Object.hasOwn(ACCENT_MAP, color)) {
+          setAccentColor(color as AccentColor);
           output = `Theme updated to ${color}.`;
         } else {
-          output = `Invalid color. Available: green, cyan, amber, magenta.`;
+          output = `Invalid color. Available: ${Object.keys(ACCENT_MAP).join(', ')}.`;
         }
         break;
       case 'api':
@@ -132,7 +133,8 @@ export default function InteractiveTerminal() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-[10%] left-1/2 -translate-x-1/2 w-[90vw] max-w-2xl bg-canvas border border-hairline rounded-lg shadow-2xl z-[100] font-mono text-xs sm:text-sm overflow-hidden flex flex-col max-h-[70vh]"
+            data-lenis-prevent
+            className="fixed top-[10%] left-1/2 -translate-x-1/2 w-[90vw] max-w-2xl bg-[#0a0a09]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-[100] font-mono text-xs sm:text-sm overflow-hidden flex flex-col max-h-[70vh]"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-2 border-b border-hairline bg-surface-soft">

@@ -26,6 +26,9 @@ export interface Project {
   description: string;
   liveUrl: string | null;
   githubUrl: string | null;
+  tagline: string;
+  highlights: { value: string; label: string }[];
+  visual: 'placement' | 'ledger';
 }
 
 export interface Skills {
@@ -108,6 +111,13 @@ export const PROJECTS: Project[] = [
       'Built a role-based placement portal serving 1000+ students, companies, admins, and coordinators, automating job postings, eligibility filtering, and live application tracking. Implemented automated eligibility checks against student academic data, eliminating manual shortlisting. Secured with JWT-based authentication, role-specific dashboards, and protected routes.',
     liveUrl: 'https://tnp-nitkkr.vercel.app/',
     githubUrl: null,
+    tagline: 'Hiring season, automated.',
+    highlights: [
+      { value: '1000+', label: 'students onboarded' },
+      { value: '4', label: 'role-based dashboards' },
+      { value: '0', label: 'manual shortlists' },
+    ],
+    visual: 'placement',
   },
   {
     title: 'Reckon — Double-Entry Wallet & Payments Ledger',
@@ -117,6 +127,13 @@ export const PROJECTS: Project[] = [
       'Built an append-only double-entry ledger as the sole money-writing module, guaranteeing zero balance drift and no double-spends under concurrent transfers. Enforced correctness under concurrency via fixed-order pessimistic row locking, committing ledger entries and balance updates atomically. Implemented idempotency keys on all money-movement APIs, making retries safe by design.',
     liveUrl: null,
     githubUrl: 'https://github.com/ShivamPratap16/Reckon',
+    tagline: 'Money that always adds up.',
+    highlights: [
+      { value: '0', label: 'balance drift' },
+      { value: '100%', label: 'idempotent writes' },
+      { value: 'ACID', label: 'atomic transfers' },
+    ],
+    visual: 'ledger',
   },
 ];
 
@@ -151,11 +168,15 @@ export const TERMINAL_COMMANDS: TerminalCommand[] = [
   { cmd: 'cat hints.txt', response: '💡 PRO TIP: Press [Ctrl + K] to open the Command Palette, or [Ctrl + `] for the interactive terminal.' },
 ];
 
+export const MANIFESTO =
+  'I build the parts of software nobody sees — the APIs, ledgers and query paths that have to be fast, correct and boring at 3 a.m. I care about the milliseconds, the invariants, and the people on the other side of the request.';
+
 export const NAV_SECTIONS = [
+  { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'education', label: 'Education' },
+  { id: 'projects', label: 'Work' },
+  { id: 'skills', label: 'Stack' },
+  { id: 'contact', label: 'Contact' },
 ] as const;
 
 export interface SocialLink {
