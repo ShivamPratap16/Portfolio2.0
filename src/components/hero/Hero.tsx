@@ -7,7 +7,7 @@ import ProximityText from '@/components/fx/ProximityText';
 import Magnetic from '@/components/fx/Magnetic';
 import { EASE_OUT_EXPO } from '@/components/fx/Reveal';
 import { useApp } from '@/context/AppProvider';
-import { EXPERIENCES, PERSONAL } from '@/lib/data';
+import { PERSONAL } from '@/lib/data';
 import { scrollToId } from '@/lib/scroll';
 
 export default function Hero() {
@@ -57,7 +57,7 @@ export default function Hero() {
             <span className="relative flex h-1.5 w-1.5 text-accent">
               <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
             </span>
-            {PERSONAL.title} @ {EXPERIENCES[0].company}
+            {PERSONAL.status}
           </motion.div>
           <motion.p
             {...fadeUp(0.45)}

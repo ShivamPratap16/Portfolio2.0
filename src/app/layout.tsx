@@ -29,7 +29,7 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   title: "Shivam Pratap Raj — Software Engineer",
   description:
-    "Backend engineer specializing in Kotlin, Spring Boot, and PostgreSQL. Building production APIs, optimizing performance, and designing scalable systems. Currently at LEAP Finance.",
+    "Backend engineer specializing in Kotlin, Spring Boot, and PostgreSQL. Building production APIs, optimizing performance, and designing scalable systems. Previously at LEAP Finance.",
   keywords: [
     "Shivam Pratap Raj",
     "software engineer",
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     type: "website",
     title: "Shivam Pratap Raj — Software Engineer",
     description:
-      "Backend engineer building production APIs in Kotlin & Spring Boot. Currently at LEAP Finance.",
+      "Backend engineer building production APIs in Kotlin & Spring Boot. Previously at LEAP Finance.",
     url: "https://shivam-portfolio.vercel.app",
     siteName: "Shivam Pratap Raj",
     locale: "en_US",
@@ -88,10 +88,6 @@ export default function RootLayout({
               alumniOf: {
                 "@type": "EducationalOrganization",
                 name: "National Institute of Technology, Kurukshetra",
-              },
-              worksFor: {
-                "@type": "Organization",
-                name: "LEAP Finance",
               },
               knowsAbout: [
                 "Kotlin",
