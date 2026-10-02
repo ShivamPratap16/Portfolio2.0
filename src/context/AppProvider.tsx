@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type ViewMode = 'ui' | 'api';
-export type AccentColor = 'lime' | 'green' | 'amber' | 'cyan' | 'magenta';
+export type AccentColor = 'ember' | 'lime' | 'green' | 'amber' | 'cyan' | 'magenta';
 
 interface AppContextType {
   viewMode: ViewMode;
@@ -21,6 +21,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const ACCENT_MAP: Record<AccentColor, string> = {
+  ember: '#ff5b1f',
   lime: '#d4ff3f',
   green: '#4ade80',
   amber: '#fbbf24',
@@ -30,7 +31,7 @@ export const ACCENT_MAP: Record<AccentColor, string> = {
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [viewMode, setViewMode] = useState<ViewMode>('ui');
-  const [accentColor, setAccentColor] = useState<AccentColor>('lime');
+  const [accentColor, setAccentColor] = useState<AccentColor>('ember');
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
