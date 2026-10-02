@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type ViewMode = 'ui' | 'api';
-type AccentColor = 'green' | 'amber' | 'cyan' | 'magenta';
+export type AccentColor = 'lime' | 'green' | 'amber' | 'cyan' | 'magenta';
 
 interface AppContextType {
   viewMode: ViewMode;
@@ -14,11 +14,14 @@ interface AppContextType {
   setIsTerminalOpen: (open: boolean) => void;
   isCommandPaletteOpen: boolean;
   setIsCommandPaletteOpen: (open: boolean) => void;
+  isLoaded: boolean;
+  setIsLoaded: (loaded: boolean) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const ACCENT_MAP: Record<AccentColor, string> = {
+export const ACCENT_MAP: Record<AccentColor, string> = {
+  lime: '#d4ff3f',
   green: '#4ade80',
   amber: '#fbbf24',
   cyan: '#22d3ee',
@@ -27,9 +30,10 @@ const ACCENT_MAP: Record<AccentColor, string> = {
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [viewMode, setViewMode] = useState<ViewMode>('ui');
-  const [accentColor, setAccentColor] = useState<AccentColor>('green');
+  const [accentColor, setAccentColor] = useState<AccentColor>('lime');
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // Apply accent color to document root
   useEffect(() => {
@@ -44,7 +48,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         e.preventDefault();
         setIsCommandPaletteOpen((prev) => !prev);
       }
-      
+
       // Toggle Terminal (Ctrl+` or Cmd+`)
       if ((e.metaKey || e.ctrlKey) && e.key === '`') {
         e.preventDefault();
@@ -67,6 +71,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setIsTerminalOpen,
         isCommandPaletteOpen,
         setIsCommandPaletteOpen,
+        isLoaded,
+        setIsLoaded,
       }}
     >
       {children}

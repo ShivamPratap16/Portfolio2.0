@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-import FloatingNav from "@/components/nav/FloatingNav";
-import MobileNav from "@/components/nav/MobileNav";
+import Nav from "@/components/nav/Nav";
 import { AppProvider } from "@/context/AppProvider";
 import CommandPalette from "@/components/ui/CommandPalette";
 import InteractiveTerminal from "@/components/ui/InteractiveTerminal";
-import ShortcutHints from "@/components/ui/ShortcutHints";
+import Preloader from "@/components/fx/Preloader";
+import SmoothScroll from "@/components/fx/SmoothScroll";
+import Cursor from "@/components/fx/Cursor";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,7 +19,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// ... existing metadata ...
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
   title: "Shivam Pratap Raj — Software Engineer",
   description:
@@ -93,31 +100,27 @@ export default function RootLayout({
                 "System Design",
               ],
               sameAs: [
-                "https://github.com/shivampratap",
-                "https://linkedin.com/in/shivampratapraj",
+                "https://github.com/ShivamPratap16",
+                "https://www.linkedin.com/in/shivam-pratap-raj-99280826b/",
               ],
             }),
           }}
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-canvas text-ink font-sans min-h-screen antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} bg-canvas text-ink font-sans min-h-screen antialiased`}
       >
         <AppProvider>
-          {/* Textures and Overlays */}
-          <div className="noise-overlay" />
-          <div className="crt-overlay" />
-          
+          <div className="grain" aria-hidden />
+
+          <Preloader />
+          <SmoothScroll />
+          <Cursor />
           <CommandPalette />
           <InteractiveTerminal />
-          <ShortcutHints />
-          
-          <FloatingNav />
-          <MobileNav />
-          
-          <div className="mx-auto w-full max-w-5xl flex-1 min-h-screen flex flex-col border-x border-hairline relative z-10">
-            <main className="flex-1">{children}</main>
-          </div>
+
+          <Nav />
+          <main className="relative">{children}</main>
         </AppProvider>
       </body>
     </html>
