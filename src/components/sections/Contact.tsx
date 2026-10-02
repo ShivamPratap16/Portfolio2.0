@@ -132,7 +132,7 @@ export default function Contact() {
 
       <footer className="mt-24">
         <RevealWordmark
-          text="SHIVAM"
+          text="SPR"
           className="whitespace-nowrap text-center text-[min(24vw,21rem)] font-semibold leading-[0.8] tracking-[-0.07em]"
         />
         <div className="mt-8 flex flex-col gap-3 border-t border-hairline py-6 font-mono text-[11px] uppercase tracking-[0.15em] text-mute sm:flex-row sm:items-center sm:justify-between">

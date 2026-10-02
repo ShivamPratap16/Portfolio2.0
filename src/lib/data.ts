@@ -111,7 +111,7 @@ export const PROJECTS: Project[] = [
     stack: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Vercel'],
     description:
       'Built a role-based placement portal serving 1000+ students, companies, admins, and coordinators, automating job postings, eligibility filtering, and live application tracking. Implemented automated eligibility checks against student academic data, eliminating manual shortlisting. Secured with JWT-based authentication, role-specific dashboards, and protected routes.',
-    liveUrl: 'https://tnp-nitkkr.vercel.app/',
+    liveUrl: 'https://hireraft.com/',
     githubUrl: null,
     tagline: 'Hiring season, automated.',
     highlights: [
