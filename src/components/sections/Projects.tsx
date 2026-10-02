@@ -152,7 +152,7 @@ function ProjectCard({
               <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
               <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
               <span className="ml-3 truncate font-mono text-[10px] text-mute">
-                {project.visual === 'ledger' ? 'reckon://ledger/live' : 'tnp-nitkkr.vercel.app/dashboard'}
+                {project.visual === 'ledger' ? 'reckon://ledger/live' : 'hireraft.com/dashboard'}
               </span>
               <span className="ml-auto flex items-center gap-1.5 font-mono text-[10px] text-accent">
                 <span className="relative flex h-1.5 w-1.5">

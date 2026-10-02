@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'framer-motion';
 import ScrollWords from '@/components/fx/ScrollWords';
 import { Reveal } from '@/components/fx/Reveal';
-import { EDUCATION, MANIFESTO, METRICS } from '@/lib/data';
+import { ACHIEVEMENTS, EDUCATION, MANIFESTO, METRICS, POSITIONS } from '@/lib/data';
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -80,6 +80,28 @@ export default function About() {
           <span className="text-accent">{edu.score}</span>
         </div>
       </Reveal>
+
+      <div className="mt-6 grid gap-6 md:grid-cols-2">
+        {[
+          { heading: 'Leadership', items: POSITIONS },
+          { heading: 'Achievements', items: ACHIEVEMENTS },
+        ].map((group, g) => (
+          <Reveal key={group.heading} delay={g * 0.08} className="rounded-3xl border border-hairline p-6 sm:p-8">
+            <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-mute">{group.heading}</div>
+            <ul className="mt-5 space-y-5">
+              {group.items.map((item) => (
+                <li key={item.title} className="grid grid-cols-[1fr_auto] gap-4">
+                  <div>
+                    <div className="font-medium text-ink">{item.title}</div>
+                    <div className="mt-1 text-sm leading-relaxed text-body">{item.org}</div>
+                  </div>
+                  <span className="font-mono text-xs text-mute">{item.period}</span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        ))}
+      </div>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import ProximityText from '@/components/fx/ProximityText';
 import Magnetic from '@/components/fx/Magnetic';
 import { EASE_OUT_EXPO } from '@/components/fx/Reveal';
 import { useApp } from '@/context/AppProvider';
-import { EXPERIENCES, PERSONAL } from '@/lib/data';
+import { PERSONAL } from '@/lib/data';
 import { scrollToId } from '@/lib/scroll';
 
 export default function Hero() {
@@ -24,18 +24,16 @@ export default function Hero() {
     transition: { duration: 1.1, delay, ease: EASE_OUT_EXPO },
   });
 
-  const [first, second, ...rest] = PERSONAL.name.split(' ');
-
   return (
     <section
       id="top"
       ref={ref}
-      className="relative flex min-h-[100svh] flex-col overflow-hidden px-5 pb-5 pt-24 sm:px-8 sm:pb-6 md:pt-28"
+      className="relative flex min-h-[100svh] flex-col overflow-hidden px-5 pb-5 pt-24 sm:px-8 sm:pb-6 lg:pt-28"
     >
       {/* ASCII art */}
       <motion.div
         style={{ y: artY, opacity: fade }}
-        className="pointer-events-none absolute inset-x-0 top-[4.5rem] h-[36svh] md:inset-x-auto md:right-0 md:top-[8svh] md:h-[62svh] md:w-[56%]"
+        className="pointer-events-none absolute inset-x-0 top-[4.5rem] h-[33svh] md:inset-x-auto md:right-0 md:top-[8svh] md:h-[62svh] md:w-[56%]"
       >
         <motion.div
           className="h-full w-full"
@@ -49,7 +47,7 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col">
         {/* Statement */}
-        <div className="mt-[33svh] max-w-[34rem] md:mt-[7svh] lg:mt-[9svh]">
+        <div className="mt-[30svh] max-w-[34rem] md:mt-[3svh] lg:mt-[max(1rem,calc(9svh-2.5rem))]">
           <motion.div
             {...fadeUp(0.3)}
             className="mb-5 inline-flex md:mb-7 items-center gap-2.5 rounded-full border border-white/10 bg-canvas/60 py-1.5 pl-2.5 pr-4 font-mono text-[11px] uppercase tracking-[0.14em] text-body backdrop-blur"
@@ -57,7 +55,7 @@ export default function Hero() {
             <span className="relative flex h-1.5 w-1.5 text-accent">
               <span className="pulse-dot h-1.5 w-1.5 rounded-full bg-accent" />
             </span>
-            {PERSONAL.title} @ {EXPERIENCES[0].company}
+            {PERSONAL.status}
           </motion.div>
           <motion.p
             {...fadeUp(0.45)}
@@ -91,31 +89,39 @@ export default function Hero() {
         </div>
 
         {/* Name */}
-        <motion.div style={{ y: nameY }} className="mt-auto pt-8 md:pt-12">
-          <motion.div
-            {...fadeUp(1)}
-            className="mb-3 hidden items-end justify-end font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-ash md:flex"
-          >
-            <span className="text-right">
-              donut.c · rendered live in ascii
-              <br />
-              move your cursor ↘
-            </span>
+        <motion.div style={{ y: nameY }} className="mt-auto pt-8 md:pt-6">
+          <div className="flex items-end justify-between gap-6">
+            <h1 className="select-none leading-[0.78] tracking-[-0.05em] text-ink">
+              <span className="sr-only">{PERSONAL.name}</span>
+              <span aria-hidden>
+                <ProximityText
+                  text="SPR"
+                  play={isLoaded}
+                  delay={0.1}
+                  radius={420}
+                  className="block whitespace-nowrap text-[clamp(6rem,36vw,13rem)] md:text-[min(25vw,31svh,22rem)]"
+                />
+              </span>
+            </h1>
+            <motion.div {...fadeUp(1)} className="mb-[0.6em] hidden shrink-0 text-right sm:block">
+              <div className="text-2xl font-medium tracking-[-0.02em] text-ink md:text-3xl">{PERSONAL.name}</div>
+              <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-mute">
+                {PERSONAL.title} · Backend
+              </div>
+              <div className="mt-8 hidden font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-ash md:block">
+                donut.c · rendered live in ascii
+                <br />
+                move your cursor ↘
+              </div>
+            </motion.div>
+          </div>
+          {/* Small screens: full name under the monogram */}
+          <motion.div {...fadeUp(1)} className="mt-3 sm:hidden">
+            <div className="text-xl font-medium tracking-[-0.02em] text-ink">{PERSONAL.name}</div>
+            <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-mute">
+              {PERSONAL.title} · Backend
+            </div>
           </motion.div>
-          <h1 className="select-none leading-[0.8] tracking-[-0.065em] text-ink">
-            {/* Desktop: single full-bleed line */}
-            <ProximityText
-              text={PERSONAL.name}
-              play={isLoaded}
-              delay={0.1}
-              className="hidden whitespace-nowrap text-[clamp(4rem,10.6vw,10.25rem)] md:block"
-            />
-            {/* Mobile: stacked */}
-            <span className="block whitespace-nowrap text-[16.5vw] md:hidden">
-              <ProximityText text={first} play={isLoaded} delay={0.1} className="block" />
-              <ProximityText text={[second, ...rest].join(' ')} play={isLoaded} delay={0.3} className="block" />
-            </span>
-          </h1>
         </motion.div>
 
         <motion.div

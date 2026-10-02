@@ -9,6 +9,7 @@ export interface Personal {
   location: string;
   title: string;
   subtitle: string;
+  status: string;
 }
 
 export interface Experience {
@@ -74,13 +75,14 @@ export const PERSONAL: Personal = {
   location: 'NIT Kurukshetra · Bengaluru',
   title: 'Software Engineer',
   subtitle: 'Backend · APIs · Performance · Systems',
+  status: 'Open to full-time backend roles',
 };
 
 export const EXPERIENCES: Experience[] = [
   {
     company: 'LEAP Finance',
     role: 'Software Engineer Intern',
-    period: 'Jan 2026 – Present',
+    period: 'Jan 2026 – Jun 2026',
     location: 'Bengaluru',
     bullets: [
       'Designed and shipped production RESTful APIs in Kotlin and Spring Boot, owning features end-to-end from PostgreSQL schema design to production release.',
@@ -109,7 +111,7 @@ export const PROJECTS: Project[] = [
     stack: ['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Vercel'],
     description:
       'Built a role-based placement portal serving 1000+ students, companies, admins, and coordinators, automating job postings, eligibility filtering, and live application tracking. Implemented automated eligibility checks against student academic data, eliminating manual shortlisting. Secured with JWT-based authentication, role-specific dashboards, and protected routes.',
-    liveUrl: 'https://tnp-nitkkr.vercel.app/',
+    liveUrl: 'https://hireraft.com/',
     githubUrl: null,
     tagline: 'Hiring season, automated.',
     highlights: [
@@ -124,7 +126,7 @@ export const PROJECTS: Project[] = [
     year: '2026',
     stack: ['Kotlin', 'Spring Boot', 'PostgreSQL', 'Flyway', 'Docker'],
     description:
-      'Built an append-only double-entry ledger as the sole money-writing module, guaranteeing zero balance drift and no double-spends under concurrent transfers. Enforced correctness under concurrency via fixed-order pessimistic row locking, committing ledger entries and balance updates atomically. Implemented idempotency keys on all money-movement APIs, making retries safe by design.',
+      'Built an append-only double-entry ledger as the sole money-writing module, guaranteeing zero balance drift and no double-spends under concurrent transfers. Enforced correctness under concurrency via fixed-order pessimistic row locking (FOR NO KEY UPDATE), committing ledger entries and balance updates atomically to eliminate deadlocks and race conditions. Implemented idempotency keys on all money-movement APIs, making retries and duplicate requests safe by design.',
     liveUrl: null,
     githubUrl: 'https://github.com/ShivamPratap16/Reckon',
     tagline: 'Money that always adds up.',
@@ -138,10 +140,10 @@ export const PROJECTS: Project[] = [
 ];
 
 export const SKILLS = {
-  LANGUAGES: ['Kotlin', 'Java', 'Python', 'JavaScript', 'SQL', 'C++'],
-  BACKEND: ['Spring Boot', 'Express', 'Flask', 'REST APIs'],
-  DATA: ['PostgreSQL', 'Elasticsearch', 'MongoDB'],
-  INFRA: ['Docker', 'AWS', 'Liquibase'],
+  LANGUAGES: ['Kotlin', 'Java', 'SQL', 'Python', 'JavaScript', 'C++'],
+  BACKEND: ['Spring Boot', 'Express.js', 'React.js', 'Flask', 'REST APIs'],
+  DATA: ['PostgreSQL', 'Elasticsearch', 'MongoDB', 'Firebase'],
+  INFRA: ['AWS', 'Docker', 'Git', 'Liquibase', 'Postman', 'Vercel'],
   ENGINEERING: ['System Design', 'Database Design', 'Performance Optimization'],
 };
 
@@ -154,6 +156,16 @@ export const EDUCATION: Education[] = [
   },
 ];
 
+export const POSITIONS: Position[] = [
+  { title: 'Tech Head', org: 'Antariksh – Astronomy Club, NIT Kurukshetra', period: '2023 – 2024' },
+  { title: 'Event Organizer', org: 'Innovation Cell, NIT Kurukshetra – BidBizz (Finance Event)', period: '2023' },
+];
+
+export const ACHIEVEMENTS: Position[] = [
+  { title: 'Smart India Hackathon', org: 'Cleared internal round — top 10 of 200 teams at NIT Kurukshetra', period: '2024' },
+  { title: 'Workshop Organizer', org: 'Conducted a data analytics workshop attended by 500+ students', period: '2023' },
+];
+
 export const METRICS: Metric[] = [
   { value: 95, suffix: '%', label: 'Faster API Response' },
   { value: 2, suffix: 'M+', label: 'Records Searched' },
@@ -163,7 +175,7 @@ export const METRICS: Metric[] = [
 
 export const TERMINAL_COMMANDS: TerminalCommand[] = [
   { cmd: 'whoami', response: 'shivam_pratap_raj' },
-  { cmd: 'cat role.txt', response: 'Software Engineer @ LEAP Finance\nBackend · APIs · Performance · Systems' },
+  { cmd: 'cat role.txt', response: 'Software Engineer · ex-SWE Intern @ LEAP Finance\nBackend · APIs · Performance · Systems' },
   { cmd: 'ls skills/', response: 'kotlin  java  spring-boot  postgresql  elasticsearch  docker' },
   { cmd: 'cat hints.txt', response: '💡 PRO TIP: Press [Ctrl + K] to open the Command Palette, or [Ctrl + `] for the interactive terminal.' },
 ];
