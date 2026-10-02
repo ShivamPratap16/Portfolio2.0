@@ -69,7 +69,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
@@ -108,7 +111,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} bg-canvas text-ink font-sans min-h-screen antialiased`}
+        className="bg-canvas text-ink font-sans min-h-screen antialiased"
       >
         <AppProvider>
           <div className="grain" aria-hidden />

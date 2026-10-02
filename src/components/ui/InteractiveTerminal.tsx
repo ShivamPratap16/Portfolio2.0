@@ -39,7 +39,7 @@ export default function InteractiveTerminal() {
             <br />- <span className="text-[var(--color-accent)]">clear</span> : clear terminal history
             <br />- <span className="text-[var(--color-accent)]">whoami</span> : prints current user
             <br />- <span className="text-[var(--color-accent)]">cat [file]</span> : view file contents (try: cat projects.txt, cat skills.json)
-            <br />- <span className="text-[var(--color-accent)]">theme [color]</span> : change theme (lime, green, cyan, amber, magenta)
+            <br />- <span className="text-[var(--color-accent)]">theme [color]</span> : change theme (ember, lime, green, cyan, amber, magenta)
             <br />- <span className="text-[var(--color-accent)]">download resume</span> : trigger PDF download
             <br />- <span className="text-[var(--color-accent)]">sudo hire shivam</span> : highly recommended
             <br />- <span className="text-[var(--color-accent)]">api mode</span> : toggle raw API view

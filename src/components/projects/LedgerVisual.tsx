@@ -111,7 +111,7 @@ export default function LedgerVisual() {
               <motion.div
                 key={e.id}
                 layout
-                initial={{ opacity: 0, y: -16, backgroundColor: 'rgba(212,255,63,0.12)' }}
+                initial={{ opacity: 0, y: -16, backgroundColor: 'rgba(255,255,255,0.07)' }}
                 animate={{ opacity: 1, y: 0, backgroundColor: 'rgba(0,0,0,0)' }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}

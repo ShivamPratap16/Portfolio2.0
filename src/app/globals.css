@@ -12,7 +12,7 @@
   --color-surface: #121211;
 
   /* Dynamic Accent */
-  --color-accent: var(--theme-accent, #d4ff3f);
+  --color-accent: var(--theme-accent, #ff5b1f);
 
   /* ─── Fonts ────────────────────────────────────────────────────────── */
   --font-sans: var(--font-geist-sans);
@@ -50,7 +50,7 @@ html.lenis body {
 body {
   background-color: var(--color-canvas);
   color: var(--color-ink);
-  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   overflow-x: clip;
 }
 
