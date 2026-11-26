@@ -22,7 +22,7 @@ const OUTCOMES: { stage: Stage; note: string }[] = [
   { stage: 'callback', note: '"shaam 6 baje ke baad" → 18:00' },
   { stage: 'dnd', note: '"dobara call mat karna" → DND' },
 ];
-const ROWS = 6;
+const ROWS = 9;
 
 const STAGE_STYLE: Record<Stage, string> = {
   dropped: 'text-rose-400',
@@ -39,8 +39,12 @@ export default function RecoveryVisual() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { margin: '-10% 0px' });
   const [leads, setLeads] = useState<Lead[]>([
-    { id: -1, name: 'Neha', step: 'aadhaar_otp', stage: 'recovered', note: 'completed KYC' },
-    { id: -2, name: 'Dev', step: 'video_kyc', stage: 'callback', note: '"kal subah" → 10:00' },
+    { id: -1, name: 'Ritika', step: 'pan_verify', stage: 'dropped' },
+    { id: -2, name: 'Kunal', step: 'aadhaar_otp', stage: 'nudged' },
+    { id: -3, name: 'Pooja', step: 'video_kyc', stage: 'calling' },
+    { id: -4, name: 'Neha', step: 'aadhaar_otp', stage: 'recovered', note: 'completed KYC' },
+    { id: -5, name: 'Dev', step: 'video_kyc', stage: 'callback', note: '"kal subah" → 10:00' },
+    { id: -6, name: 'Sahil', step: 'bank_link', stage: 'recovered', note: 'completed KYC' },
   ]);
   const [stats, setStats] = useState({ dropped: 118, recovered: 38 });
   const counter = useRef(0);
@@ -55,7 +59,7 @@ export default function RecoveryVisual() {
           const i = STAGES.indexOf(l.stage as (typeof STAGES)[number]);
           if (i < 0 || l.stage === 'recovered') return l;
           if (l.stage === 'analyzed') {
-            const o = OUTCOMES[(l.id + n) % OUTCOMES.length];
+            const o = OUTCOMES[Math.abs(l.id + n) % OUTCOMES.length];
             if (o.stage === 'recovered') setStats((s) => ({ ...s, recovered: s.recovered + 1 }));
             return { ...l, stage: o.stage, note: o.note };
           }

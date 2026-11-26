@@ -9,9 +9,11 @@ import ScrambleText from '@/components/fx/ScrambleText';
 import RevealWordmark from '@/components/fx/RevealWordmark';
 import { PERSONAL, SOCIAL_LINKS } from '@/lib/data';
 import { scrollToId } from '@/lib/scroll';
+import { useModKey } from '@/lib/useModKey';
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
+  const mod = useModKey();
 
   const copy = async () => {
     try {
@@ -108,11 +110,11 @@ export default function Contact() {
           <div className="font-mono text-[11px] uppercase tracking-[0.18em] text-mute">Shortcuts</div>
           <ul className="mt-4 space-y-2 text-body">
             <li>
-              <kbd className="rounded border border-hairline px-1.5 py-0.5 font-mono text-xs text-ink">⌘ K</kbd>{' '}
+              <kbd className="rounded border border-hairline px-1.5 py-0.5 font-mono text-xs text-ink">{mod} K</kbd>{' '}
               command palette
             </li>
             <li>
-              <kbd className="rounded border border-hairline px-1.5 py-0.5 font-mono text-xs text-ink">⌘ `</kbd>{' '}
+              <kbd className="rounded border border-hairline px-1.5 py-0.5 font-mono text-xs text-ink">{mod} `</kbd>{' '}
               interactive terminal
             </li>
             <li className="text-mute">try `sudo hire shivam`</li>

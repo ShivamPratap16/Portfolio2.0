@@ -8,6 +8,7 @@ import { scrollToId } from '@/lib/scroll';
 import ScrambleText from '@/components/fx/ScrambleText';
 import Magnetic from '@/components/fx/Magnetic';
 import { EASE_OUT_EXPO } from '@/components/fx/Reveal';
+import { useModKey } from '@/lib/useModKey';
 
 function useLocalTime() {
   const [time, setTime] = useState('');
@@ -30,6 +31,7 @@ export default function Nav() {
   const { isLoaded, setIsCommandPaletteOpen } = useApp();
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
+  const mod = useModKey();
   const [active, setActive] = useState<string>('');
   const time = useLocalTime();
 
@@ -123,7 +125,7 @@ export default function Nav() {
               className="hidden items-center gap-1.5 rounded-full border border-hairline px-3 py-2 font-mono text-[11px] text-body transition-colors hover:border-accent hover:text-ink sm:flex"
               aria-label="Open command palette"
             >
-              <kbd className="font-sans">⌘</kbd>K
+              <kbd className="font-sans">{mod}</kbd>K
             </button>
             <button
               onClick={() => setOpen((o) => !o)}

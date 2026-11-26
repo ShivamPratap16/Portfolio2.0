@@ -27,6 +27,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://spr-three.vercel.app"),
   title: "Shivam Pratap Raj — Software Engineer",
   description:
     "Backend engineer specializing in Kotlin, Spring Boot, and PostgreSQL. Building production APIs, optimizing performance, and designing scalable systems. Associate Software Engineer at Carelon Global Solutions; previously at LEAP Finance.",

@@ -49,23 +49,23 @@ export default function Home() {
         </Marquee>
       </div>
 
-      <Section id="about" className="py-28 md:py-40">
+      <Section id="about" className="py-24 md:py-28">
         <About />
       </Section>
 
-      <Section id="experience" className="py-20 md:py-32">
+      <Section id="experience" className="py-16 md:py-24">
         <Experience />
       </Section>
 
-      <Section id="projects" className="py-20 md:py-32">
+      <Section id="projects" className="py-16 md:py-24">
         <Projects />
       </Section>
 
-      <Section id="skills" className="py-20 md:py-32">
+      <Section id="skills" className="py-16 md:py-24">
         <Skills />
       </Section>
 
-      <Section id="contact" className="pt-28 md:pt-40">
+      <Section id="contact" className="pt-24 md:pt-28">
         <Contact />
       </Section>
     </>

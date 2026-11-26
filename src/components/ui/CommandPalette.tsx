@@ -7,6 +7,7 @@ import { ArrowRight, Download, Code, Mail, Copy, TerminalSquare, X } from 'lucid
 import { motion, AnimatePresence } from 'framer-motion';
 import { NAV_SECTIONS, PERSONAL, SOCIAL_LINKS } from '@/lib/data';
 import { scrollToId } from '@/lib/scroll';
+import { useModKey } from '@/lib/useModKey';
 
 const itemClass =
   'flex items-center gap-3 px-3 py-2.5 rounded-xl cursor-pointer text-body aria-selected:bg-white/[0.06] aria-selected:text-ink transition-colors';
@@ -15,6 +16,7 @@ const groupHeading = (label: string) => (
 );
 
 export default function CommandPalette() {
+  const mod = useModKey();
   const { isCommandPaletteOpen, setIsCommandPaletteOpen, setViewMode, accentColor, setAccentColor, setIsTerminalOpen } =
     useApp();
 
@@ -111,7 +113,7 @@ export default function CommandPalette() {
                   </Command.Item>
                   <Command.Item onSelect={() => runCommand(() => setIsTerminalOpen(true))} className={itemClass}>
                     <TerminalSquare size={14} /> Open interactive terminal
-                    <kbd className="ml-auto font-mono text-[10px] text-mute">⌘ `</kbd>
+                    <kbd className="ml-auto font-mono text-[10px] text-mute">{mod} `</kbd>
                   </Command.Item>
                   <Command.Item
                     onSelect={() =>
