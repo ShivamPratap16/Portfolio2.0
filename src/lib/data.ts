@@ -29,7 +29,7 @@ export interface Project {
   githubUrl: string | null;
   tagline: string;
   highlights: { value: string; label: string }[];
-  visual: 'placement' | 'ledger';
+  visual: 'placement' | 'ledger' | 'recovery';
 }
 
 export interface Skills {
@@ -75,10 +75,19 @@ export const PERSONAL: Personal = {
   location: 'NIT Kurukshetra · Bengaluru',
   title: 'Software Engineer',
   subtitle: 'Backend · APIs · Performance · Systems',
-  status: 'Open to full-time backend roles',
+  status: 'Associate Software Engineer @ Carelon Global Solutions',
 };
 
 export const EXPERIENCES: Experience[] = [
+  {
+    company: 'Carelon Global Solutions',
+    role: 'Associate Software Engineer',
+    period: 'Nov 2026 – Present',
+    location: 'Bengaluru',
+    bullets: [
+      'Joined Carelon Global Solutions (an Elevance Health company) as an Associate Software Engineer through campus placement, working on healthcare technology platforms.',
+    ],
+  },
   {
     company: 'LEAP Finance',
     role: 'Software Engineer Intern',
@@ -105,6 +114,22 @@ export const EXPERIENCES: Experience[] = [
 ];
 
 export const PROJECTS: Project[] = [
+  {
+    title: 'Revive — KYC Drop-off Recovery Engine',
+    year: '2026',
+    stack: ['Python', 'FastAPI', 'PostgreSQL', 'Redis', 'Gemini', 'React', 'Docker'],
+    description:
+      'A backend that wins back users who abandon KYC halfway through a fintech app. It ingests app events idempotently, detects users stuck on a step, sends an in-app nudge and then an AI voice call within TRAI calling rules, and has Gemini read the redacted transcript to act on it: scheduling callbacks or adding the number to DND. Work is never lost: a transactional outbox with FOR UPDATE SKIP LOCKED workers, HMAC-signed webhooks that are safe against duplicates and reordering, and 148 tests against real Postgres and Redis.',
+    liveUrl: 'https://revive-h920.onrender.com',
+    githubUrl: 'https://github.com/ShivamPratap16/revive',
+    tagline: 'Users who left, won back.',
+    highlights: [
+      { value: '32%', label: 'drop-offs recovered' },
+      { value: '148', label: 'tests, real infra' },
+      { value: '6/6', label: 'held-out evals' },
+    ],
+    visual: 'recovery',
+  },
   {
     title: 'Training & Placement Management System',
     year: '2024',
@@ -141,8 +166,8 @@ export const PROJECTS: Project[] = [
 
 export const SKILLS = {
   LANGUAGES: ['Kotlin', 'Java', 'SQL', 'Python', 'JavaScript', 'C++'],
-  BACKEND: ['Spring Boot', 'Express.js', 'React.js', 'Flask', 'REST APIs'],
-  DATA: ['PostgreSQL', 'Elasticsearch', 'MongoDB', 'Firebase'],
+  BACKEND: ['Spring Boot', 'FastAPI', 'Express.js', 'React.js', 'Flask', 'REST APIs'],
+  DATA: ['PostgreSQL', 'Redis', 'Elasticsearch', 'MongoDB', 'Firebase'],
   INFRA: ['AWS', 'Docker', 'Git', 'Liquibase', 'Postman', 'Vercel'],
   ENGINEERING: ['System Design', 'Database Design', 'Performance Optimization'],
 };
@@ -175,7 +200,7 @@ export const METRICS: Metric[] = [
 
 export const TERMINAL_COMMANDS: TerminalCommand[] = [
   { cmd: 'whoami', response: 'shivam_pratap_raj' },
-  { cmd: 'cat role.txt', response: 'Software Engineer · ex-SWE Intern @ LEAP Finance\nBackend · APIs · Performance · Systems' },
+  { cmd: 'cat role.txt', response: 'Associate Software Engineer @ Carelon Global Solutions · ex-SWE Intern @ LEAP Finance\nBackend · APIs · Performance · Systems' },
   { cmd: 'ls skills/', response: 'kotlin  java  spring-boot  postgresql  elasticsearch  docker' },
   { cmd: 'cat hints.txt', response: '💡 PRO TIP: Press [Ctrl + K] to open the Command Palette, or [Ctrl + `] for the interactive terminal.' },
 ];

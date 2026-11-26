@@ -42,7 +42,7 @@ export default function Contact() {
       <div className="mt-16 grid items-center gap-12 md:grid-cols-[1fr_auto]">
         <Reveal>
           <p className="max-w-lg text-xl leading-snug text-body">
-            Open to backend &amp; platform engineering roles. If you have a hard problem involving APIs, data or
+            Currently building at Carelon Global Solutions. If you have a hard problem involving APIs, data or
             correctness under load — I&apos;d love to hear about it.
           </p>
           <button

@@ -13,6 +13,7 @@ import {
 import SectionLabel from '@/components/ui/SectionLabel';
 import LedgerVisual from '@/components/projects/LedgerVisual';
 import PlacementVisual from '@/components/projects/PlacementVisual';
+import RecoveryVisual from '@/components/projects/RecoveryVisual';
 import Magnetic from '@/components/fx/Magnetic';
 import { PROJECTS, type Project } from '@/lib/data';
 import { useMediaQuery } from '@/lib/useMediaQuery';
@@ -20,6 +21,13 @@ import { useMediaQuery } from '@/lib/useMediaQuery';
 const VISUALS = {
   ledger: LedgerVisual,
   placement: PlacementVisual,
+  recovery: RecoveryVisual,
+};
+
+const VISUAL_URLS = {
+  ledger: 'reckon://ledger/live',
+  placement: 'hireraft.com/dashboard',
+  recovery: 'revive-h920.onrender.com',
 };
 
 function ProjectCard({
@@ -152,7 +160,7 @@ function ProjectCard({
               <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
               <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
               <span className="ml-3 truncate font-mono text-[10px] text-mute">
-                {project.visual === 'ledger' ? 'reckon://ledger/live' : 'hireraft.com/dashboard'}
+                {VISUAL_URLS[project.visual]}
               </span>
               <span className="ml-auto flex items-center gap-1.5 font-mono text-[10px] text-accent">
                 <span className="relative flex h-1.5 w-1.5">

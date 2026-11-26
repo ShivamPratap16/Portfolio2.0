@@ -29,7 +29,7 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   title: "Shivam Pratap Raj — Software Engineer",
   description:
-    "Backend engineer specializing in Kotlin, Spring Boot, and PostgreSQL. Building production APIs, optimizing performance, and designing scalable systems. Previously at LEAP Finance.",
+    "Backend engineer specializing in Kotlin, Spring Boot, and PostgreSQL. Building production APIs, optimizing performance, and designing scalable systems. Associate Software Engineer at Carelon Global Solutions; previously at LEAP Finance.",
   keywords: [
     "Shivam Pratap Raj",
     "software engineer",
@@ -40,14 +40,15 @@ export const metadata: Metadata = {
     "REST API",
     "NIT Kurukshetra",
     "LEAP Finance",
+    "Carelon Global Solutions",
   ],
   authors: [{ name: "Shivam Pratap Raj" }],
   openGraph: {
     type: "website",
     title: "Shivam Pratap Raj — Software Engineer",
     description:
-      "Backend engineer building production APIs in Kotlin & Spring Boot. Previously at LEAP Finance.",
-    url: "https://shivam-portfolio.vercel.app",
+      "Backend engineer building production APIs in Kotlin & Spring Boot. Associate Software Engineer at Carelon; previously at LEAP Finance.",
+    url: "https://spr-three.vercel.app",
     siteName: "Shivam Pratap Raj",
     locale: "en_US",
   },
@@ -81,7 +82,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Shivam Pratap Raj",
-              url: "https://shivam-portfolio.vercel.app",
+              url: "https://spr-three.vercel.app",
               jobTitle: "Software Engineer",
               description:
                 "Backend engineer specializing in Kotlin, Spring Boot, and PostgreSQL.",
