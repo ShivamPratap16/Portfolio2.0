@@ -10,6 +10,7 @@ import RevealWordmark from '@/components/fx/RevealWordmark';
 import { PERSONAL, SOCIAL_LINKS } from '@/lib/data';
 import { scrollToId } from '@/lib/scroll';
 import { useModKey } from '@/lib/useModKey';
+import RequestComposer from '@/components/sections/RequestComposer';
 
 export default function Contact() {
   const [copied, setCopied] = useState(false);
@@ -41,7 +42,7 @@ export default function Contact() {
         </span>
       </h2>
 
-      <div className="mt-16 grid items-center gap-12 md:grid-cols-[1fr_auto]">
+      <div className="mt-16 grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
         <Reveal>
           <p className="max-w-lg text-xl leading-snug text-body">
             Currently building at Carelon Global Solutions. If you have a hard problem involving APIs, data or
@@ -67,20 +68,8 @@ export default function Contact() {
           </button>
         </Reveal>
 
-        <Reveal delay={0.1} className="justify-self-start md:justify-self-end">
-          <Magnetic strength={0.45}>
-            <a
-              href={`mailto:${PERSONAL.email}`}
-              className="group relative flex h-44 w-44 items-center justify-center overflow-hidden rounded-full bg-accent text-canvas sm:h-56 sm:w-56"
-            >
-              <span className="absolute inset-0 scale-0 rounded-full bg-ink transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-100" />
-              <span className="relative text-center font-mono text-xs uppercase tracking-[0.2em] transition-colors duration-500 group-hover:text-canvas">
-                Get in
-                <br />
-                <span className="font-serif text-4xl normal-case italic tracking-normal">touch</span>
-              </span>
-            </a>
-          </Magnetic>
+        <Reveal delay={0.1}>
+          <RequestComposer />
         </Reveal>
       </div>
 

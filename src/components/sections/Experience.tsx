@@ -1,7 +1,9 @@
 'use client';
 
 import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import CareerTrace from '@/components/hero/CareerTrace';
+import { useMediaQuery } from '@/lib/useMediaQuery';
 import SectionLabel from '@/components/ui/SectionLabel';
 import { Reveal } from '@/components/fx/Reveal';
 import { EXPERIENCES, type Experience as ExperienceItem } from '@/lib/data';
@@ -65,10 +67,28 @@ function Role({ item, index }: { item: ExperienceItem; index: number }) {
   );
 }
 
+function TraceOverview() {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, margin: '-15% 0px' });
+  const wide = useMediaQuery('(min-width: 768px)');
+  return (
+    <div ref={ref} className="mb-16 grid items-end gap-8 md:mb-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
+      <Reveal>
+        <p className="max-w-sm font-mono text-xs uppercase leading-relaxed tracking-[0.16em] text-mute">
+          The whole path so far, as a <span className="text-ink">distributed trace</span>. Each span is a place I
+          shipped from — hover one for its attributes, click to jump to it.
+        </p>
+      </Reveal>
+      <CareerTrace play={inView} compact={!wide} />
+    </div>
+  );
+}
+
 export default function Experience() {
   return (
     <div>
       <SectionLabel index="02" label="Experience" title="Where I've shipped to production." />
+      <TraceOverview />
       {EXPERIENCES.map((item, i) => (
         <Role key={item.company} item={item} index={i} />
       ))}

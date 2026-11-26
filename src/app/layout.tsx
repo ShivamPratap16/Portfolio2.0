@@ -1,3 +1,4 @@
+import RequestRail from '@/components/fx/RequestRail';
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
@@ -117,6 +118,7 @@ export default function RootLayout({
           <Preloader />
           <SmoothScroll />
           <Cursor />
+          <RequestRail />
           <CommandPalette />
           <InteractiveTerminal />
 
