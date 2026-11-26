@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import AsciiDonut from '@/components/fx/AsciiDonut';
+import CareerTrace from '@/components/hero/CareerTrace';
 import ProximityText from '@/components/fx/ProximityText';
 import Magnetic from '@/components/fx/Magnetic';
 import { EASE_OUT_EXPO } from '@/components/fx/Reveal';
@@ -30,24 +30,23 @@ export default function Hero() {
       ref={ref}
       className="relative flex min-h-[100svh] flex-col overflow-hidden px-5 pb-5 pt-24 sm:px-8 sm:pb-6 lg:pt-28"
     >
-      {/* ASCII art */}
+      {/* Career, rendered as a distributed trace (desktop) */}
       <motion.div
         style={{ y: artY, opacity: fade }}
-        className="pointer-events-none absolute inset-x-0 top-[4.5rem] h-[33svh] md:inset-x-auto md:right-0 md:top-[8svh] md:h-[62svh] md:w-[56%]"
+        className="absolute right-8 top-[calc(5rem+4svh)] z-20 hidden w-[min(46%,40rem)] lg:block"
       >
         <motion.div
-          className="h-full w-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isLoaded ? 1 : 0 }}
-          transition={{ duration: 1.2 }}
+          initial={{ opacity: 0, y: 24 }}
+          animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 1.1, delay: 0.35, ease: EASE_OUT_EXPO }}
         >
-          <AsciiDonut className="h-full w-full" play={isLoaded} />
+          <CareerTrace play={isLoaded} />
         </motion.div>
       </motion.div>
 
       <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col">
         {/* Statement */}
-        <div className="mt-[30svh] max-w-[34rem] md:mt-[3svh] lg:mt-[max(1rem,calc(9svh-2.5rem))]">
+        <div className="mt-[3svh] max-w-[34rem] lg:mt-[max(1rem,calc(9svh-2.5rem))]">
           <motion.div
             {...fadeUp(0.3)}
             className="mb-5 inline-flex md:mb-7 items-center gap-2.5 rounded-full border border-white/10 bg-canvas/60 py-1.5 pl-2.5 pr-4 font-mono text-[11px] uppercase tracking-[0.14em] text-body backdrop-blur"
@@ -86,6 +85,11 @@ export default function Hero() {
               <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-ink transition-transform duration-500 group-hover:origin-left group-hover:scale-x-100" />
             </a>
           </motion.div>
+
+          {/* Career trace (mobile / tablet), in the flow */}
+          <motion.div {...fadeUp(0.75)} className="mt-10 lg:hidden">
+            <CareerTrace play={isLoaded} compact />
+          </motion.div>
         </div>
 
         {/* Name */}
@@ -107,11 +111,6 @@ export default function Hero() {
               <div className="text-2xl font-medium tracking-[-0.02em] text-ink md:text-3xl">{PERSONAL.name}</div>
               <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-mute">
                 {PERSONAL.title} · Backend
-              </div>
-              <div className="mt-8 hidden font-mono text-[10px] uppercase leading-relaxed tracking-[0.18em] text-ash md:block">
-                donut.c · rendered live in ascii
-                <br />
-                move your cursor ↘
               </div>
             </motion.div>
           </div>

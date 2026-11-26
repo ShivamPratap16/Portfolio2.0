@@ -141,3 +141,20 @@ body {
     animation: none;
   }
 }
+
+/* In-flight span: the part of the career trace that hasn't happened yet */
+.trace-running {
+  background: repeating-linear-gradient(
+    -45deg,
+    color-mix(in srgb, var(--color-accent) 45%, transparent) 0 4px,
+    transparent 4px 8px
+  );
+  background-size: 11.3px 11.3px;
+  animation: trace-run 0.8s linear infinite;
+}
+@keyframes trace-run {
+  to { background-position: 11.3px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trace-running { animation: none; }
+}
