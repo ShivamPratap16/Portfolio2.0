@@ -1,6 +1,7 @@
 'use client';
 
 import Hero from '@/components/hero/Hero';
+import CityScene from '@/components/three/CityScene';
 import About from '@/components/sections/About';
 import Experience from '@/components/sections/Experience';
 import Projects from '@/components/sections/Projects';
@@ -30,6 +31,8 @@ export default function Home() {
 
   return (
     <>
+      <CityScene />
+      <div className="relative z-10">
       <Hero />
 
       <div className="border-y border-hairline py-6 md:py-8">
@@ -68,6 +71,7 @@ export default function Home() {
       <Section id="contact" className="pt-24 md:pt-28">
         <Contact />
       </Section>
+      </div>
     </>
   );
 }
