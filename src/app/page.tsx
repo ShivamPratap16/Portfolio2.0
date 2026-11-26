@@ -1,18 +1,15 @@
 'use client';
 
 import Hero from '@/components/hero/Hero';
-import CityScene from '@/components/three/CityScene';
+import ParticleScene from '@/components/three/ParticleScene';
 import About from '@/components/sections/About';
 import Experience from '@/components/sections/Experience';
 import Projects from '@/components/sections/Projects';
 import Skills from '@/components/sections/Skills';
 import Contact from '@/components/sections/Contact';
-import Marquee from '@/components/fx/Marquee';
 import ApiView from '@/components/views/ApiView';
 import { useApp } from '@/context/AppProvider';
-import { SKILLS } from '@/lib/data';
 
-const MARQUEE_WORDS = [...SKILLS.LANGUAGES.slice(0, 2), ...SKILLS.BACKEND.slice(0, 1), ...SKILLS.DATA, ...SKILLS.INFRA.slice(0, 2)];
 
 function Section({ id, children, className = '' }: { id: string; children: React.ReactNode; className?: string }) {
   return (
@@ -31,26 +28,10 @@ export default function Home() {
 
   return (
     <>
-      <CityScene />
+      <ParticleScene />
       <div className="relative z-10">
       <Hero />
 
-      <div className="border-y border-hairline py-6 md:py-8">
-        <Marquee baseVelocity={-2.5}>
-          {MARQUEE_WORDS.map((w, i) => (
-            <span key={w} className="flex items-center">
-              <span
-                className={`px-6 text-[clamp(2.5rem,7vw,6rem)] font-semibold leading-none tracking-[-0.04em] md:px-10 ${
-                  i % 2 ? 'text-outline' : 'text-ink'
-                }`}
-              >
-                {w}
-              </span>
-              <span className="text-[clamp(1.5rem,3vw,2.5rem)] text-accent">✦</span>
-            </span>
-          ))}
-        </Marquee>
-      </div>
 
       <Section id="about" className="py-24 md:py-28">
         <About />

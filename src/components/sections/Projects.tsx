@@ -76,7 +76,7 @@ function ProjectCard({
         onPointerMove={onMove}
         onPointerLeave={onLeave}
         style={{ scale, rotateX: rotX, rotateY: rotY, top: stacked ? `${index * 24}px` : 0 }}
-        className="relative w-full origin-top overflow-hidden rounded-[28px] border border-white/[0.07] bg-surface shadow-[0_-30px_80px_-20px_rgba(0,0,0,0.9)]"
+        className="relative w-full origin-top overflow-hidden rounded-[28px] border border-white/[0.09] bg-surface/55 shadow-[0_-30px_80px_-20px_rgba(0,0,0,0.9)] backdrop-blur-2xl"
       >
         <motion.div className="pointer-events-none absolute inset-0" style={{ background: spotlight }} />
         <motion.div className="pointer-events-none absolute inset-0 z-20 bg-black" style={{ opacity: dim }} />
