@@ -52,8 +52,8 @@ export default function ScrambleText({
     <span
       className={className}
       onPointerEnter={onHover ? run : undefined}
-      aria-label={text}
     >
+      <span className="sr-only">{text}</span>
       <span aria-hidden>{output}</span>
     </span>
   );

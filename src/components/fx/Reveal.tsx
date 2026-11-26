@@ -11,14 +11,17 @@ export function Reveal({
   delay = 0,
   y = 40,
   className,
+  as = 'div',
 }: {
   children: ReactNode;
   delay?: number;
   y?: number;
   className?: string;
+  as?: 'div' | 'li';
 }) {
+  const Tag = as === 'li' ? motion.li : motion.div;
   return (
-    <motion.div
+    <Tag
       className={className}
       initial={{ opacity: 0, y, filter: 'blur(8px)' }}
       whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -26,7 +29,7 @@ export function Reveal({
       transition={{ duration: 1.1, delay, ease: EASE_OUT_EXPO }}
     >
       {children}
-    </motion.div>
+    </Tag>
   );
 }
 
@@ -64,12 +67,12 @@ export function SplitReveal({
   return (
     <motion.span
       className={className}
-      aria-label={text}
       initial="hidden"
       {...(controlled
         ? { animate: play ? 'show' : 'hidden' }
         : { whileInView: 'show', viewport: { once: true, margin: '-10% 0px' } })}
     >
+      <span className="sr-only">{text}</span>
       {parts.map((part, i) => (
         <span key={i} aria-hidden className="inline-block overflow-hidden pb-[0.12em] -mb-[0.12em] align-bottom">
           <motion.span

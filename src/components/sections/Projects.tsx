@@ -153,7 +153,8 @@ function ProjectCard({
             rel="noreferrer"
             data-cursor={project.liveUrl ? 'Visit' : 'Code'}
             className="relative block min-h-[420px] overflow-hidden rounded-2xl border border-white/[0.06] bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.05),transparent_60%)] p-4 sm:p-5"
-            aria-label={`Open ${project.title}`}
+            tabIndex={-1}
+            aria-hidden
           >
             <div className="mb-4 flex items-center gap-2">
               <span className="h-2.5 w-2.5 rounded-full bg-white/10" />

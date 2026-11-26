@@ -83,7 +83,7 @@ export default function Nav() {
           <button
             onClick={() => go('top')}
             className="group flex items-center gap-3 font-mono text-xs uppercase tracking-[0.2em] text-ink"
-            aria-label="Back to top"
+            title="Back to top"
           >
             <span className="relative flex h-2 w-2 text-accent">
               <span className="pulse-dot h-2 w-2 rounded-full bg-accent" />

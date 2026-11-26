@@ -54,11 +54,14 @@ function Role({ item, index }: { item: ExperienceItem; index: number }) {
         </div>
         <ul className="space-y-8">
           {item.bullets.map((b, i) => (
-            <Reveal key={i} delay={i * 0.05}>
-              <li className="group relative text-lg leading-relaxed text-body transition-colors duration-300 hover:text-ink md:text-xl">
+            <Reveal
+              key={i}
+              as="li"
+              delay={i * 0.05}
+              className="group relative text-lg leading-relaxed text-body transition-colors duration-300 hover:text-ink md:text-xl"
+            >
                 <span className="absolute -left-[37px] top-[0.6em] h-2 w-2 rounded-full border border-ash bg-canvas transition-colors duration-300 group-hover:border-accent group-hover:bg-accent" />
                 {highlight(b)}
-              </li>
             </Reveal>
           ))}
         </ul>

@@ -50,7 +50,7 @@ function fromCanvas(draw: Draw, n: number, worldW: number, depth: number, cw = 1
 function text(str: string, family: string, n: number, worldW: number) {
   return fromCanvas(
     (ctx, w, h) => {
-      ctx.font = `700 300px ${family}`;
+      ctx.font = `700 ${Math.round(h * 0.72)}px ${family}`;
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(str, w / 2, h / 2);
@@ -58,8 +58,8 @@ function text(str: string, family: string, n: number, worldW: number) {
     n,
     worldW,
     0.8,
-    1800,
-    420,
+    1400,
+    330,
   );
 }
 
@@ -78,7 +78,7 @@ function planet(n: number) {
       z = r * Math.sin(phi) * Math.sin(th);
     } else {
       const a = Math.random() * Math.PI * 2;
-      const r = 11 + Math.pow(Math.random(), 0.7) * 6;
+      const r = 10.5 + Math.pow(Math.random(), 0.7) * 4.5;
       x = Math.cos(a) * r;
       y = rnd(0.12);
       z = Math.sin(a) * r;
@@ -221,6 +221,14 @@ const cap: Draw = (ctx, w, h) => {
   ctx.fill();
 };
 
+/** Draw a 1024×1024-designed shape onto a smaller canvas. */
+const scaled =
+  (d: Draw): Draw =>
+  (ctx, w, h) => {
+    ctx.scale(w / 1024, h / 1024);
+    d(ctx, 1024, 1024);
+  };
+
 /** Section anchors → shape index. */
 const STOPS: { sel: string; f: number }[] = [
   { sel: '#top', f: 0 },
@@ -234,7 +242,7 @@ const STOPS: { sel: string; f: number }[] = [
 ];
 const SPIN = [0, 1, 0.6, 0, 0, 0, 1, 0.5];
 /** How bright each stop is (dimmer where long text sits over the particles). */
-const DIM = [1, 0.9, 0.38, 1, 1, 1, 0.75, 0.95];
+const DIM = [1, 0.7, 0.38, 1, 1, 1, 0.75, 0.8];
 const GALAXY = 7;
 
 /* ─── Shaders ───────────────────────────────────────────────────────────── */
@@ -302,6 +310,11 @@ const FS = /* glsl */ `
   }
 `;
 
+const yieldToMain = () =>
+  new Promise<void>((r) =>
+    'requestIdleCallback' in window ? requestIdleCallback(() => r(), { timeout: 300 }) : setTimeout(r, 16),
+  );
+
 /* ─── Component ─────────────────────────────────────────────────────────── */
 
 export default function ParticleScene() {
@@ -318,7 +331,7 @@ export default function ParticleScene() {
     let cleanup = () => {};
 
     (async () => {
-      const THREE = await import('three');
+      const THREE = await import('./three-lite');
       await document.fonts?.ready;
       const mount = mountRef.current;
       if (disposed || !mount) return;
@@ -344,19 +357,22 @@ export default function ParticleScene() {
 
       /* build shapes */
       const family = getComputedStyle(document.body).fontFamily || 'sans-serif';
-      const shapes = [
-        text('SHIVAM', family, N, 40),
-        planet(N),
-        rack(N),
-        fromCanvas(phone, N, 17, 1.2),
-        fromCanvas(cap, N, 22, 1.2),
-        text('Σ=0', family, N, 24),
-        helix(N),
-        galaxy(N),
+      const builders: (() => Float32Array)[] = [
+        () => text('SHIVAM', family, N, 40),
+        () => planet(N),
+        () => rack(N),
+        () => fromCanvas(scaled(phone), N, 17, 1.2, 640, 640),
+        () => fromCanvas(scaled(cap), N, 22, 1.2, 640, 640),
+        () => text('Σ=0', family, N, 24),
+        () => helix(N),
+        () => galaxy(N),
       ];
+      const shapes = builders;
       const rows = Math.ceil(N / 256);
-      const tex = new Float32Array(256 * rows * shapes.length * 4);
-      shapes.forEach((s, si) => {
+      const tex = new Float32Array(256 * rows * builders.length * 4);
+      const dataTex = new THREE.DataTexture(tex, 256, rows * builders.length, THREE.RGBAFormat, THREE.FloatType);
+      const fill = (si: number) => {
+        const s = builders[si]();
         for (let i = 0; i < N; i++) {
           const o = (si * rows * 256 + i) * 4;
           tex[o] = s[i * 3];
@@ -364,9 +380,13 @@ export default function ParticleScene() {
           tex[o + 2] = s[i * 3 + 2];
           tex[o + 3] = 1;
         }
-      });
-      const dataTex = new THREE.DataTexture(tex, 256, rows * shapes.length, THREE.RGBAFormat, THREE.FloatType);
-      dataTex.needsUpdate = true;
+        dataTex.needsUpdate = true;
+      };
+      // the intro needs the galaxy and the name; everything else can wait
+      fill(GALAXY);
+      await yieldToMain();
+      fill(0);
+      if (disposed) return;
 
       const geo = new THREE.BufferGeometry();
       const idx = new Float32Array(N);
@@ -467,7 +487,8 @@ export default function ParticleScene() {
         if (i >= anchors.length - 1) return anchors.length - 1;
         const t = Math.min(1, Math.max(0, (y - anchors[i]) / (anchors[i + 1] - anchors[i])));
         // hold the shape for most of the section, then morph
-        const h = Math.min(1, Math.max(0, (t - 0.5) / 0.5));
+        const hold = i === 0 ? 0.08 : 0.5;
+        const h = Math.min(1, Math.max(0, (t - hold) / (1 - hold)));
         return i + h * h * (3 - 2 * h);
       };
 
@@ -553,6 +574,16 @@ export default function ParticleScene() {
         renderer.render(scene, camera);
       };
       raf = requestAnimationFrame(frame);
+
+      // remaining shapes, one per idle slice so the main thread never stalls
+      (async () => {
+        for (let si = 1; si < builders.length; si++) {
+          if (si === GALAXY) continue;
+          await yieldToMain();
+          if (disposed) return;
+          fill(si);
+        }
+      })();
 
       cleanup = () => {
         cancelAnimationFrame(raf);

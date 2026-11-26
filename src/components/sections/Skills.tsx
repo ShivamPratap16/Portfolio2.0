@@ -20,8 +20,13 @@ export default function Skills() {
       <SectionLabel index="04" label="Toolkit" title="The stack behind the systems." />
       <ul className="border-t border-hairline">
         {categories.map(([category, items], i) => (
-          <Reveal key={category} delay={i * 0.04} y={20}>
-            <li className="group relative overflow-hidden border-b border-hairline">
+          <Reveal
+            key={category}
+            as="li"
+            delay={i * 0.04}
+            y={20}
+            className="group relative overflow-hidden border-b border-hairline"
+          >
               {/* accent wipe on hover */}
               <span className="absolute inset-0 origin-bottom scale-y-0 bg-accent transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-y-100" />
               <div className="relative grid items-center gap-4 px-2 py-7 transition-colors duration-500 group-hover:text-canvas md:grid-cols-[80px_minmax(0,1fr)_minmax(0,1.3fr)] md:py-9">
@@ -47,7 +52,6 @@ export default function Skills() {
                   ))}
                 </div>
               </div>
-            </li>
           </Reveal>
         ))}
       </ul>

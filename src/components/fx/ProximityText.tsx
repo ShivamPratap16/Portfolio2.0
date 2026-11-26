@@ -59,7 +59,8 @@ export default function ProximityText({
   }, [minWeight, maxWeight, radius]);
 
   return (
-    <span className={className} aria-label={text}>
+    <span className={className}>
+      <span className="sr-only">{text}</span>
       {Array.from(text).map((ch, i) => (
         <span key={i} aria-hidden className="inline-block overflow-hidden pb-[0.08em] -mb-[0.08em] align-bottom">
           <motion.span

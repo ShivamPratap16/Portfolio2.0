@@ -50,7 +50,7 @@ export default function About() {
         className="max-w-6xl text-[clamp(1.75rem,4.2vw,3.75rem)] font-medium leading-[1.12] tracking-[-0.03em] text-ink"
       />
 
-      <div className="mt-24 grid grid-cols-2 border-t border-hairline md:grid-cols-4">
+      <div className="mt-24 grid grid-cols-2 border-t border-hairline bg-canvas/40 backdrop-blur-md md:grid-cols-4">
         {METRICS.map((m, i) => (
           <Reveal
             key={m.label}
